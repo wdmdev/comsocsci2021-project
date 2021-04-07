@@ -26,4 +26,4 @@ def clean_book(filename):
 
 chapters = pd.read_pickle("data/chapter_dataframe.pkl")
 
-print(chapters)
+# print(chapters)
