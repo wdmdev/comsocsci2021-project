@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-import pickle
+import pandas as pd
 
 def clean_book(filename):
     with open(filename, encoding='utf-8') as bad_html:
@@ -24,7 +24,6 @@ def clean_book(filename):
 # re_page = r"Page \| \d+ .+"
 # print(re.search(re_page, text))
 
-with open("Data/chapter_dataframe.pkl", "rb") as file:
-    chapters = pickle.load(file)
+chapters = pd.read_pickle("data/chapter_dataframe.pkl")
 
 print(chapters)

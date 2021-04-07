@@ -1,3 +1,4 @@
-beautifulsoup4
-pickle
 tqdm
+beautifulsoup4
+nltk
+vaderSentiment
