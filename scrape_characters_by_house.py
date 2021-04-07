@@ -1,7 +1,7 @@
-from tqdm import tqdm
 import pickle as pkl
-from bs4 import BeautifulSoup
+from tqdm import tqdm
 from requests import get
+from bs4 import BeautifulSoup
 from argparse import ArgumentParser
 
 def scrape_hogwarts_houses(url):
@@ -14,7 +14,6 @@ def scrape_hogwarts_houses(url):
 
 
 if __name__ == '__main__':
-
     arg_parser = ArgumentParser()
     arg_parser.add_argument('-output', '-o', type=str, help='Output path for saving character by house dictionary as pickle file')
 
