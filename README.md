@@ -15,3 +15,7 @@ Project in Computational Social Science as Technical University of Denmark
     * What is the text you will be analyzing?
     
     * How will you tie the two together?
+    
+
+    
+
