@@ -24,6 +24,7 @@ def clean_book(filename):
 # re_page = r"Page \| \d+ .+"
 # print(re.search(re_page, text))
 
-chapters = pd.read_pickle("data/chapter_dataframe.pkl")
+# chapters = pd.read_pickle("data/chapter_dataframe.pkl")
+
 
 # print(chapters)
