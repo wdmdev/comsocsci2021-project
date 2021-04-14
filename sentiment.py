@@ -77,3 +77,5 @@ def TF_IDF(docs_to_analyse, all_docs):
         TF_IDF.append(tf_idf)
 
     return TF, TF_IDF
+
+
