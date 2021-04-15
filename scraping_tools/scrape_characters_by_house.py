@@ -40,6 +40,12 @@ if __name__ == '__main__':
     for house, url in tqdm(websites.items()):
         characters_by_house[house] += scrape_hogwarts_houses(url)
 
+    # Hermione Granger is missing on the website we scrape from
+    characters_by_house['Gryffindor'].append('Hermione Granger')
+
+    # Removing garbage in scrape
+    characters_by_house['Hufflepuff'].remove('Fan Conversations: Hufflepuff Characters')
+
     # Save dictionary as pickle file
     with open(args.output, 'wb') as file:
         pkl.dump(characters_by_house, file)

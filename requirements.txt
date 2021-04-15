@@ -3,3 +3,4 @@ beautifulsoup4
 nltk
 vaderSentiment
 pandas
+networkx
