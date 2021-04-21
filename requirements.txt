@@ -4,3 +4,4 @@ nltk
 vaderSentiment
 pandas
 networkx
+bs4
