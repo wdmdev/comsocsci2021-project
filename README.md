@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Code for Github Pages React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project has a github page hosted as a react app [here](https://wdmdev.github.io/comsocsci2021-project)
 
 ## Available Scripts
 
