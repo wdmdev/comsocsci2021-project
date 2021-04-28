@@ -1,16 +1,14 @@
 import React from 'react';
 import {
     Card, Spin,
-    Tag, Col, Row, Typography,
-    Switch
+    Tag, Col, Row, Typography
 } from 'antd';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-github";
-import './App.css';
+import './JupViewer.css';
 
 const ReactMarkdown = require('react-markdown')
-const { Meta } = Card;
 
 class JupViewer extends React.Component {
     state = {
@@ -20,17 +18,11 @@ class JupViewer extends React.Component {
         // Editor Theme
         ed_theme: 'lightTheme',
         text_ed_theme: 'github',
-        //themes:
-        //background_theme: "#f4f7fd",
-        //background_text_theme: 'black',
         background_input_theme: '#f4f7fd',
         background_output_theme: '#f4f7fd',
         loading: true,
         notebook_json: null,
         placeholder_component: "Loading....",
-
-        // Gutter
-        gutterVisible: false
     }
 
     validURL(str) {
@@ -108,7 +100,7 @@ class JupViewer extends React.Component {
     }
 
     praseOutputs(outputs) {
-        if (outputs.length == 0) {
+        if (outputs.length === 0) {
             return ""
         }
         // Handle "data" type cells
@@ -289,44 +281,6 @@ class JupViewer extends React.Component {
                             >
                                 <Row>
                                     <Col span={1}></Col>
-                                    <Col span={22}>
-                                        <Typography.Title strong style={{
-                                            color: this.state.background_text_theme,
-                                            // fontSize: '50px',
-                                            wordWrap: 'break-word',
-                                            width: '100%',
-                                        }}>{this.props.title}</Typography.Title>
-                                        <Typography.Title
-                                            level={4} style={{
-                                                color: this.state.background_text_theme,
-                                                wordWrap: 'break-word',
-                                                width: '100%',
-                                                display: !!this.props.subtitle ? '' : 'none'
-                                            }}>{this.props.subtitle}</Typography.Title>
-                                    </Col>
-                                    <Col span={1}></Col>
-                                </Row>
-
-                                <Row>
-                                    <Col span={1}></Col>
-                                    <Col span={22}>
-                                        <img
-                                            alt="No Cover Image Found"
-                                            style={{
-                                                display: !!this.props.coverImg ? '' : 'none',
-                                                width: '100%'
-                                            }}
-                                            src={!!this.props.coverImg ? this.props.coverImg : "http://eskipaper.com/images/simple-silver-wallpaper-1.jpg"} />
-                                    </Col>
-                                    <Col span={1}>
-
-                                    </Col>
-                                </Row>
-
-                                <br></br>
-                                <br></br>
-                                <Row>
-                                    <Col span={1}></Col>
                                     <Col span={20}>
                                         <Tag color="blue" style={{ float: 'left' }}>{this.state.loading ? "Unknown" : this.state.notebook_json['metadata']['kernelspec']['display_name']}</Tag>
                                     </Col>
@@ -365,7 +319,7 @@ class JupViewer extends React.Component {
                                                         float: 'left',
                                                         padding: '5px',
                                                         color: '#56ACBC',
-                                                        display: item['cell_type'] == "code" ? '' : 'none',
+                                                        display: item['cell_type'] === "code" ? '' : 'none',
                                                     }}>
                                                     I [ {item['execution_count']} ]:
                                             </Typography.Text>
@@ -379,7 +333,7 @@ class JupViewer extends React.Component {
                                             }}
                                         >
 
-                                            {item['cell_type'] == "code" ? (
+                                            {item['cell_type'] === "code" ? (
                                                 <div
                                                     style={{
                                                         padding: '5px 0px',
@@ -397,7 +351,7 @@ class JupViewer extends React.Component {
                                                             margin: '10px 0px'
                                                         }}
                                                         width="100%"
-                                                        maxLines={item['source'].length == 0 ? 1 : item['source'].length + 1}
+                                                        maxLines={item['source'].length === 0 ? 1 : item['source'].length + 1}
                                                         onLoad={this.onLoad}
                                                         onChange={this.onChange}
                                                         fontSize={14}
@@ -420,8 +374,6 @@ class JupViewer extends React.Component {
                                                         style={{
                                                             margin: '0px 0px',
                                                             padding: '10px',
-                                                            // border:'solid',
-                                                            // borderWidth:'1px'
                                                         }}
                                                     >
                                                         <ReactMarkdown
@@ -438,11 +390,11 @@ class JupViewer extends React.Component {
                                     </Row>
 
                                     {
-                                        item['cell_type'] == 'markdown' ? <div></div> :
+                                        item['cell_type'] === 'markdown' ? <div></div> :
                                             (
                                                 <Row
                                                     style={{
-                                                        display: !!item['outputs'].length == 0 ? 'none' : 'visible',
+                                                        display: !!item['outputs'].length === 0 ? 'none' : 'visible',
                                                         backgroundColor: this.state.background_output_theme
                                                     }}>
 
@@ -453,7 +405,7 @@ class JupViewer extends React.Component {
                                                                 color: this.state.background_text_theme,
                                                                 float: 'left',
                                                                 padding: '5px',
-                                                                color: '#E5496A'
+                                                                color: 'black'
                                                             }}>
                                                             O [ {item['execution_count']} ]:
                                                         </Typography.Text>
@@ -461,7 +413,7 @@ class JupViewer extends React.Component {
                                                     <Col span={this.state.gutterVisible ? 20 : 22}
                                                         style={{
                                                             textAlign: 'left',
-                                                            color: 'white'
+                                                            color: 'black'
                                                         }}>
                                                         {this.praseOutputs(item['outputs'])}
                                                     </Col>
