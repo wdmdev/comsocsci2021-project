@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/comsocsci2021-project/static/css/main.395c4244.chunk.css",
+    "main.js": "/comsocsci2021-project/static/js/main.957abcb0.chunk.js",
+    "main.js.map": "/comsocsci2021-project/static/js/main.957abcb0.chunk.js.map",
+    "runtime-main.js": "/comsocsci2021-project/static/js/runtime-main.82914f20.js",
+    "runtime-main.js.map": "/comsocsci2021-project/static/js/runtime-main.82914f20.js.map",
+    "static/css/2.21faa3a9.chunk.css": "/comsocsci2021-project/static/css/2.21faa3a9.chunk.css",
+    "static/js/2.4abaa5ce.chunk.js": "/comsocsci2021-project/static/js/2.4abaa5ce.chunk.js",
+    "static/js/2.4abaa5ce.chunk.js.map": "/comsocsci2021-project/static/js/2.4abaa5ce.chunk.js.map",
+    "index.html": "/comsocsci2021-project/index.html",
+    "static/css/2.21faa3a9.chunk.css.map": "/comsocsci2021-project/static/css/2.21faa3a9.chunk.css.map",
+    "static/css/main.395c4244.chunk.css.map": "/comsocsci2021-project/static/css/main.395c4244.chunk.css.map",
+    "static/js/2.4abaa5ce.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.4abaa5ce.chunk.js.LICENSE.txt",
+    "static/media/BenchmarkNotebook.ipynb": "/comsocsci2021-project/static/media/BenchmarkNotebook.5771d6ce.ipynb",
+    "static/media/logo.927f1d60.svg": "/comsocsci2021-project/static/media/logo.927f1d60.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.82914f20.js",
+    "static/css/2.21faa3a9.chunk.css",
+    "static/js/2.4abaa5ce.chunk.js",
+    "static/css/main.395c4244.chunk.css",
+    "static/js/main.957abcb0.chunk.js"
+  ]
+}
