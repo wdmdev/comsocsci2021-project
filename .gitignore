@@ -770,3 +770,6 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/python,vscode,pycharm,pycharm+all,pycharm+iml,jupyternotebooks,vim,visualstudio
 test.py
+
+data/
+reddit_data/

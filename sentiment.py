@@ -26,7 +26,7 @@ def emotion_score(doc):
 
     fdist = nltk.FreqDist(doc)
     doc_filtered = [word for word in doc if (word in e_score.keys())]
-    print(doc_filtered)
+    
     if doc_filtered:
         emotion_score = np.mean([e_score[word] for word in doc_filtered], axis = 0)
         emotion = {emotions[i]: emotion_score[i] for i in range(len(emotions))}
