@@ -5,3 +5,5 @@ vaderSentiment
 pandas
 networkx
 bs4
+psaw
+wordcloud
