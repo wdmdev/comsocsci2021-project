@@ -14,35 +14,28 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h2 className="font-semibold text-4xl text-blueGray-600">
-                Notus React - A beautiful extension for Tailwind CSS.
+                Harry Potter Network Analysis
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-                Notus React is Free and Open Source. It does not change any of
-                the CSS from{" "}
-                <a
-                  href="https://tailwindcss.com/?ref=creativetim"
-                  className="text-blueGray-600"
-                  target="_blank"
-                >
-                  Tailwind CSS
-                </a>
-                . It features multiple HTML elements and it comes with dynamic
-                components for ReactJS, Vue and Angular.
+                We have created a network analysis of the original 7 Harry Potter books and combined them
+                with a network analysis of the r/harrypotter subreddit.
+                Scroll down the page to see what we found or take a look at the Jupyter Notebook to get 
+                behind the scenes of the more technical stuff.
               </p>
               <div className="mt-12">
                 <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/react/overview/notus?ref=nr-index"
-                  target="_blank"
+                  href={require("assets/files/notebook.zip").default}
+                  download = "HP_network_notebook.zip"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  Get started
+                  Download Notebook
                 </a>
                 <a
-                  href="https://github.com/creativetimofficial/notus-react?ref=nr-index"
+                  href="https://github.com/wdmdev/comsocsci2021-project"
                   className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                   target="_blank"
                 >
-                  Github Star
+                  Github Code
                 </a>
               </div>
             </div>
@@ -50,9 +43,9 @@ export default function Index() {
         </div>
 
         <img
-          className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
-          src={require("assets/img/pattern_react.png").default}
-          alt="..."
+          className="img-round absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
+          src={require("assets/img/HP_houses.jpg").default}
+          alt="Harry Potter Hogwarts Houses Cartoon"
         />
       </section>
 
@@ -80,11 +73,8 @@ export default function Index() {
           <div className="flex flex-wrap items-center">
             <div className="w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
-                <img
-                  alt="..."
-                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
-                  className="w-full align-middle rounded-t-lg"
-                />
+                <embed src={require("assets/networks/HP_network.html").default}>
+                </embed>
                 <blockquote className="relative p-8 mb-4">
                   <svg
                     preserveAspectRatio="none"
@@ -98,13 +88,11 @@ export default function Index() {
                     ></polygon>
                   </svg>
                   <h4 className="text-xl font-bold text-white">
-                    Great for your awesome project
+                    Explore the character network of Harry Potter
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
-                    Putting together a page has never been easier than matching
-                    together pre-made components. From landing pages
-                    presentation to login areas, you can easily customise and
-                    built your pages.
+                    We have created an interactive network using <a href="https://pyvis.readthedocs.io/en/latest/" target="_blank">pyvis</a>.
+                    The network shows the Harry Potter character network according to the character's Hogwarts Houses
                   </p>
                 </blockquote>
               </div>

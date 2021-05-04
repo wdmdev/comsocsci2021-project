@@ -1,9 +1,10 @@
 {
-  "name": "notus-react",
+  "name": "hpnetwork-react",
   "version": "1.1.0",
-  "description": "Notus React - A free Tailwind CSS and React UI Kit and Admin by Creative Tim.",
-  "repository": "https://github.com/creativetimofficial/notus-react",
+  "description": "Harry Potter Network Analysis",
+  "repository": "https://github.com/wdmdev/comsocsci2021-project",
   "license": "MIT",
+  "homepage": "https://wdmdev.github.io/comsocsci2021-project/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.3",
     "@popperjs/core": "2.9.1",
@@ -22,11 +23,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && gulp licenses",
+    "build": "react-scripts build && gulp licenses && webpack --config webpack.config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm start",
-    "build:tailwind": "tailwind build src/assets/styles/index.css -o src/assets/styles/tailwind.css"
+    "build:tailwind": "tailwind build src/assets/styles/index.css -o src/assets/styles/tailwind.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +48,9 @@
   },
   "optionalDependencies": {
     "typescript": "4.2.3"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0",
+    "html-loader": "^2.1.2"
   }
 }
