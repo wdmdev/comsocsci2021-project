@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import HtmlNetwork from "components/Networks/HtmlNetwork.js";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
@@ -73,8 +74,6 @@ export default function Index() {
           <div className="flex flex-wrap items-center">
             <div className="w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
-                <embed src={require("assets/networks/HP_network.html").default}>
-                </embed>
                 <blockquote className="relative p-8 mb-4">
                   <svg
                     preserveAspectRatio="none"
@@ -92,7 +91,7 @@ export default function Index() {
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
                     We have created an interactive network using <a href="https://pyvis.readthedocs.io/en/latest/" target="_blank">pyvis</a>.
-                    The network shows the Harry Potter character network according to the character's Hogwarts Houses
+                    The network shows the Harry Potter character network according to the character's Hogwarts Houses <br/>
                   </p>
                 </blockquote>
               </div>
