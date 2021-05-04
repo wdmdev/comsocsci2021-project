@@ -25,9 +25,9 @@ ReactDOM.render(
       {/* add routes without layouts */}
       <Route path="/landing" exact component={Landing} />
       <Route path="/profile" exact component={Profile} />
-      <Route path="/" exact component={Index} />
+      <Route path="/comsocsci2021-project" exact component={Index} />
       {/* add redirect for first page */}
-      <Redirect from="*" to="/" />
+      <Redirect from="*" to="/comsocsci2021-project" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
