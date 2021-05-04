@@ -57,11 +57,16 @@ def get_submissions(overwrite = False, date1 = None, date2 = None):
         date2 = date2 if date2 else int(datetime.datetime(2021, 3, 25).timestamp())
         #query = "Gryffindor"
 
-        gen = api.search_submissions(subreddit = my_subreddit,
-                                    after = date1,
-                                    before = date2)
+        date_range = pd.date_range(start=datetime.datetime.utcfromtimestamp(date1), 
+        end=datetime.datetime.utcfromtimestamp(date2), periods=None, freq="D")
 
-        results = list(gen)
+        results = []
+
+        for i in tqdm(range(len(date_range)-1)):
+            gen = api.search_submissions(subreddit = my_subreddit,
+                                    after = int(date_range[i].timestamp()),
+                                    before = int(date_range[i+1].timestamp()))
+            results = results + list(gen)
 
         df_submissions = pd.DataFrame([(p.d_["title"], 
                             p.d_["id"], 
@@ -79,12 +84,8 @@ def get_submissions(overwrite = False, date1 = None, date2 = None):
         df_submissions = df_submissions.dropna().reset_index(drop=True)
 
         # Save raw data to csv, so we don't have to fetch it again
-        if not os.path.exists(RAW_DATA_FILENAME):
-            print('Saving raw data file..')
-            df_submissions.to_csv(RAW_DATA_FILENAME, index=False)
-            print(f'Raw data saved to {RAW_DATA_FILENAME}')
-        else:
-            print(f'Previous version of raw data exists in {RAW_DATA_FILENAME}')
+        df_submissions.to_csv(RAW_DATA_FILENAME, index=False)
+     
     # print(df_submissions)
     return df_submissions
 
@@ -96,7 +97,7 @@ def preprocess_submissions(df_submissions=None, overwrite = False):
     if os.path.exists(PROCESSED_FILENAME) and not overwrite:
         df_submissions = pd.read_csv(PROCESSED_FILENAME)
     else:
-        assert df_submissions, "Please specify a submissions dataframe"
+        assert isinstance(df_submissions, pd.DataFrame), "Please specify a submissions dataframe"
         # Preprocess
         df_submissions["house"] = df_submissions[house_id].apply(lambda x: 'Gryffindor' if 'GR' in x
                                                                     else 'Slytherin' if 'SL' in x
@@ -106,7 +107,7 @@ def preprocess_submissions(df_submissions=None, overwrite = False):
         )
 
         # Drop nodes with non of the four houses
-        df_submissions.dropna(subset=['house']).reset_index(drop=True, inplace=True)
+        df_submissions = df_submissions.dropna(subset=['house']).reset_index(drop=True, inplace=False)
 
         df_submissions.to_csv(PROCESSED_FILENAME, index=False)
     
@@ -115,16 +116,23 @@ def preprocess_submissions(df_submissions=None, overwrite = False):
 #####################################################################################################
 #ACTIVITY OF TOP USERS
 #####################################################################################################
-def get_author_subreddits(authors):
-    date1 = int(datetime.datetime(2021, 1, 1).timestamp())
-    date2 = int(datetime.datetime(2021, 3, 25).timestamp())
+def get_author_subreddits(authors, date1=None, date2 = None):
+    date1 = date1 if date1 else int(datetime.datetime(2021, 1, 1).timestamp())
+    date2 = date2 if date2 else int(datetime.datetime(2021, 3, 25).timestamp())
 
-    gen = api.search_submissions(author=authors,
-                                after = date1,
-                                before = date2,
+    
+
+    date_range = pd.date_range(start=datetime.datetime.utcfromtimestamp(date1), 
+        end=datetime.datetime.utcfromtimestamp(date2), periods=None, freq="D")
+
+    results = []
+
+    for i in tqdm(range(len(date_range)-1)):
+        gen = api.search_submissions(author=authors,
+                                after = int(date_range[i].timestamp()),
+                                before = int(date_range[i+1].timestamp()),
                                 filter=['author', 'subreddit', 'subreddit_id'])
-
-    results = list(gen)
+        results = results + list(gen)
 
     author_subreddits = pd.DataFrame([(p.d_["author"], 
                         p.d_["subreddit"], 
@@ -135,14 +143,14 @@ def get_author_subreddits(authors):
     return author_subreddits
 
 
-def get_top_author_subreddits(df_submissions, X=100, overwrite = False):
+def get_top_author_subreddits(df_submissions, X=100, overwrite = False, date1 = None, date2 = None):
     """
     Gets the subreddits for the top X users in df_submissions
     """
     if os.path.exists(AUTHOR_SUBREDDIT_FILENAME) and not overwrite:
         author_subreddits = pd.read_csv(AUTHOR_SUBREDDIT_FILENAME)
     else:
-        assert df_submissions, "Please specify a submissions dataframe"
+        assert isinstance(df_submissions, pd.DataFrame), "Please specify a submissions dataframe"
         # Looking at top X authors from r/harrypotter to not get time out from Pushshift
         # X=100
         submissions_by_author = df_submissions.groupby('author').sum()
@@ -152,7 +160,7 @@ def get_top_author_subreddits(df_submissions, X=100, overwrite = False):
 
         authors = top_X_submissions['author']
     
-        author_subreddits = get_author_subreddits(authors)
+        author_subreddits = get_author_subreddits(authors, date1=date1, date2 = date2)
         author_subreddits.to_csv(AUTHOR_SUBREDDIT_FILENAME, index=False)
     
     return author_subreddits
@@ -179,17 +187,17 @@ def get_author_posts(author, date1=None, date2=None):
     date1 = date1 if date1 else int(datetime.datetime(2021, 1, 1).timestamp())
     date2 = date2 if date2 else int(datetime.datetime(2021, 3, 25).timestamp())
 
+    # date_range = pd.date_range(start=datetime.datetime.utcfromtimestamp(date1), 
+    #     end=datetime.datetime.utcfromtimestamp(date2), periods=None, freq="D")
+
+    submission_results = []
+    comment_results = []
+
     submissions = api.search_submissions(author=author,
                                 after = date1,
                                 before = date2,
                                 filter=['author', 'subreddit', 'title', 'selftext', 'id', 'created_utc'])
-
     submission_results = list(submissions)
-
-    for s in submission_results:
-        s.d_['link_id'] = ''
-        s.d_['parent_id'] = ''
-        s.d_['text'] = s.d_['title'] + s.d_['selftext']
 
     comments = api.search_comments(author=author,
                                 after = date1,
@@ -197,6 +205,12 @@ def get_author_posts(author, date1=None, date2=None):
                                 filter=['author', 'subreddit', 'body', 'id', 'link_id', 'parent_id', 'created_utc'])
 
     comment_results = list(comments)
+
+    for s in submission_results:
+        s.d_['link_id'] = ''
+        s.d_['parent_id'] = ''
+        s.d_['text'] = s.d_['title'] + s.d_['selftext']
+
     for c in comment_results:
         c.d_['text'] = c.d_['body']
 
@@ -212,12 +226,12 @@ def get_author_posts(author, date1=None, date2=None):
                         columns = ["id", "author", 'subreddit', 'text', 'link_id', 'parent_id', 'created_utc'])
     return author_posts
 
-def get_activity_of_users(chosen_users=None, overwrite = False):
+def get_activity_of_users(chosen_users=None, overwrite = False, date1=None, date2=None):
     if os.path.exists(AUTHOR_POSTS_FILENAME) and not overwrite:
         author_posts = pd.read_csv(AUTHOR_POSTS_FILENAME)
     else:
-        assert chosen_users, "No users were specified"
-        author_posts = get_author_posts(chosen_users[0])
+        assert isinstance(chosen_users, list), "No users were specified"
+        author_posts = get_author_posts(chosen_users[0], date1=date1, date2=date2)
         for user in tqdm(chosen_users[1:]):
             posts = get_author_posts(user)
             author_posts = pd.concat([author_posts, posts], ignore_index=True)
@@ -302,7 +316,7 @@ def get_comments(df_submissions=None, overwrite = False, date1 = None, date2 = N
         df_comments = pd.read_csv(SUBREDDIT_COMMENTS_RAW)
         print('Loaded raw data')
     else:
-        assert df_submissions, "Please specify a submissions dataframe"
+        assert isinstance(df_submissions, pd.DataFrame), "Please specify a submissions dataframe"
         # get comments on harrypotter subreddit
         api = PushshiftAPI()
         my_subreddit = "harrypotter"
@@ -339,12 +353,13 @@ def get_comments(df_submissions=None, overwrite = False, date1 = None, date2 = N
     
     return df_comments
 
-def preprocess_comments(df_comments=None, overwrite = False):
+def preprocess_comments(df_comments=None, df_submissions = None, overwrite = False):
     house_id = 'house_id'
     if os.path.exists(SUBREDDIT_COMMENTS_PROCESSED) and not overwrite:
         df_comments = pd.read_csv(SUBREDDIT_COMMENTS_PROCESSED)
     else:
-        assert df_comments, "Please specify a comments dataframe"
+        assert isinstance(df_comments, pd.DataFrame), "Please specify a comments dataframe"
+        assert isinstance(df_submissions, pd.DataFrame), "Please specify a submissions dataframe"
         # Preprocess
         df_comments = df_comments.dropna(subset=[house_id]).reset_index(drop=True, inplace=False)
         df_comments["house"] = df_comments[house_id].apply(lambda x: 'Gryffindor' if 'GR' in x
@@ -398,7 +413,7 @@ def create_interactions(df_comments=None, overwrite = False):
         with open(SUBREDDIT_INTERACTIONS, "rb") as file:
             interactions = pickle.load(file)
     else:
-        assert df_comments, "Please specify a comments dataframe"
+        assert isinstance(df_comments, pd.DataFrame), "Please specify a comments dataframe"
         # remove submissions, as they do not have a receiving house
         interactions = df_comments[df_comments.parent_house != "None"].reset_index(drop=True, inplace=False)
         interactions = interactions[["house", "parent_house", "text"]]
