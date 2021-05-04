@@ -1,0 +1,468 @@
+#####################################################################################################
+#SETUP
+#####################################################################################################
+
+import os
+from psaw import PushshiftAPI
+import pandas as pd
+import numpy as np
+import datetime
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+import datetime
+import pickle
+from wordcloud import WordCloud
+import nltk
+import re
+from PIL import Image
+from sentiment import *
+
+nltk.download('punkt')
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from nltk import word_tokenize
+SW = stopwords.words("english")
+
+DATA_FOLDER = 'reddit_data'
+RAW_DATA_FILENAME = os.path.join(DATA_FOLDER, 'HP_raw_data.csv')
+PROCESSED_FILENAME = os.path.join(DATA_FOLDER, 'HP_processed_data.csv')
+AUTHOR_SUBREDDIT_FILENAME = os.path.join(DATA_FOLDER, 'HP_author_subreddit_data.csv')
+AUTHOR_POSTS_FILENAME = os.path.join(DATA_FOLDER, 'HP_chosen_author_posts_data.csv')
+SUBREDDIT_COMMENTS_RAW = os.path.join(DATA_FOLDER, 'HP_comments_raw.csv')
+SUBREDDIT_COMMENTS_PROCESSED = os.path.join(DATA_FOLDER, 'HP_comments_processed.csv')
+SUBREDDIT_INTERACTIONS = os.path.join(DATA_FOLDER, 'HP_subreddit_interactions.pkl')
+
+
+if not os.path.isdir(DATA_FOLDER):
+    os.mkdir(DATA_FOLDER)
+
+api = PushshiftAPI()
+
+#####################################################################################################
+#GETTING DATA
+#####################################################################################################
+
+def get_submissions(overwrite = False, date1 = None, date2 = None):
+    """
+    Collect data from the subreddit r/harrypotter between date1 and date2
+    """   
+
+    if os.path.exists(RAW_DATA_FILENAME) and not overwrite:
+        print('Loading existing raw data')
+        df_submissions = pd.read_csv(RAW_DATA_FILENAME)
+        print('Loaded raw data')
+    else:
+        my_subreddit = "harrypotter"
+        date1 = date1 if date1 else int(datetime.datetime(2021, 1, 1).timestamp())
+        date2 = date2 if date2 else int(datetime.datetime(2021, 3, 25).timestamp())
+        #query = "Gryffindor"
+
+        gen = api.search_submissions(subreddit = my_subreddit,
+                                    after = date1,
+                                    before = date2)
+
+        results = list(gen)
+
+        df_submissions = pd.DataFrame([(p.d_["title"], 
+                            p.d_["id"], 
+                            p.d_["score"], 
+                            p.d_["created_utc"],
+                            datetime.datetime.utcfromtimestamp(p.d_["created_utc"]).strftime("%Y-%m-%d"),
+                            p.d_["author"],
+                            p.d_["num_comments"],
+                            p.d_["author_flair_css_class"]) 
+                            for p in results], 
+                            columns = ["title", "id", "score", "created_utc", "creation_date", "author", "num_comments", 
+                            "house_id"])
+
+        # remove entries with no house
+        df_submissions = df_submissions.dropna().reset_index(drop=True)
+
+        # Save raw data to csv, so we don't have to fetch it again
+        if not os.path.exists(RAW_DATA_FILENAME):
+            print('Saving raw data file..')
+            df_submissions.to_csv(RAW_DATA_FILENAME, index=False)
+            print(f'Raw data saved to {RAW_DATA_FILENAME}')
+        else:
+            print(f'Previous version of raw data exists in {RAW_DATA_FILENAME}')
+    # print(df_submissions)
+    return df_submissions
+
+def preprocess_submissions(df_submissions=None, overwrite = False):
+    """
+    Adds the users house ti the data frame
+    """
+    house_id = 'house_id'
+    if os.path.exists(PROCESSED_FILENAME) and not overwrite:
+        df_submissions = pd.read_csv(PROCESSED_FILENAME)
+    else:
+        assert df_submissions, "Please specify a submissions dataframe"
+        # Preprocess
+        df_submissions["house"] = df_submissions[house_id].apply(lambda x: 'Gryffindor' if 'GR' in x
+                                                                    else 'Slytherin' if 'SL' in x
+                                                                    else 'Hufflepuff' if 'HF' in x
+                                                                    else 'Ravenclaw' if 'RV' in x
+                                                                    else None
+        )
+
+        # Drop nodes with non of the four houses
+        df_submissions.dropna(subset=['house']).reset_index(drop=True, inplace=True)
+
+        df_submissions.to_csv(PROCESSED_FILENAME, index=False)
+    
+    return df_submissions
+
+#####################################################################################################
+#ACTIVITY OF TOP USERS
+#####################################################################################################
+def get_author_subreddits(authors):
+    date1 = int(datetime.datetime(2021, 1, 1).timestamp())
+    date2 = int(datetime.datetime(2021, 3, 25).timestamp())
+
+    gen = api.search_submissions(author=authors,
+                                after = date1,
+                                before = date2,
+                                filter=['author', 'subreddit', 'subreddit_id'])
+
+    results = list(gen)
+
+    author_subreddits = pd.DataFrame([(p.d_["author"], 
+                        p.d_["subreddit"], 
+                        p.d_["subreddit_id"]) 
+                        for p in results], 
+                        columns = ["author", "subreddit", 'subreddit_id'])
+
+    return author_subreddits
+
+
+def get_top_author_subreddits(df_submissions, X=100, overwrite = False):
+    """
+    Gets the subreddits for the top X users in df_submissions
+    """
+    if os.path.exists(AUTHOR_SUBREDDIT_FILENAME) and not overwrite:
+        author_subreddits = pd.read_csv(AUTHOR_SUBREDDIT_FILENAME)
+    else:
+        assert df_submissions, "Please specify a submissions dataframe"
+        # Looking at top X authors from r/harrypotter to not get time out from Pushshift
+        # X=100
+        submissions_by_author = df_submissions.groupby('author').sum()
+        top_X_submissions = submissions_by_author.sort_values(by='num_comments', ascending=False).head(X).reset_index()
+        # print(f'{len(top_X_submissions)} authors')
+        # top_X_submissions
+
+        authors = top_X_submissions['author']
+    
+        author_subreddits = get_author_subreddits(authors)
+        author_subreddits.to_csv(AUTHOR_SUBREDDIT_FILENAME, index=False)
+    
+    return author_subreddits
+
+def chose_users(author_subreddits, limit = 20):
+    """
+    Returns a list of users with activity on more subreddits than the limit
+    """
+    # Unique subreddits for each selected r/harrypotter author
+    unique_sub_reddits = author_subreddits.groupby('author').nunique().sort_values(by='subreddit', ascending=False)
+    # unique_sub_reddits
+
+    # limit = 20 # Different subreddits
+    chosen_users = unique_sub_reddits[unique_sub_reddits['subreddit'] >= limit]
+    # chosen_users
+
+    chosen_users = chosen_users.index
+    return list(chosen_users)
+
+def get_author_posts(author, date1=None, date2=None):
+    """
+    Returns activity on other subreddits for the user
+    """
+    date1 = date1 if date1 else int(datetime.datetime(2021, 1, 1).timestamp())
+    date2 = date2 if date2 else int(datetime.datetime(2021, 3, 25).timestamp())
+
+    submissions = api.search_submissions(author=author,
+                                after = date1,
+                                before = date2,
+                                filter=['author', 'subreddit', 'title', 'selftext', 'id', 'created_utc'])
+
+    submission_results = list(submissions)
+
+    for s in submission_results:
+        s.d_['link_id'] = ''
+        s.d_['parent_id'] = ''
+        s.d_['text'] = s.d_['title'] + s.d_['selftext']
+
+    comments = api.search_comments(author=author,
+                                after = date1,
+                                before = date2,
+                                filter=['author', 'subreddit', 'body', 'id', 'link_id', 'parent_id', 'created_utc'])
+
+    comment_results = list(comments)
+    for c in comment_results:
+        c.d_['text'] = c.d_['body']
+
+    author_posts = pd.DataFrame([(
+                        p.d_["id"],
+                        p.d_["author"], 
+                        p.d_["subreddit"], 
+                        p.d_["text"],
+                        p.d_["link_id"],
+                        p.d_["parent_id"],
+                        p.d_["created_utc"]) 
+                        for p in (submission_results + comment_results)], 
+                        columns = ["id", "author", 'subreddit', 'text', 'link_id', 'parent_id', 'created_utc'])
+    return author_posts
+
+def get_activity_of_users(chosen_users=None, overwrite = False):
+    if os.path.exists(AUTHOR_POSTS_FILENAME) and not overwrite:
+        author_posts = pd.read_csv(AUTHOR_POSTS_FILENAME)
+    else:
+        assert chosen_users, "No users were specified"
+        author_posts = get_author_posts(chosen_users[0])
+        for user in tqdm(chosen_users[1:]):
+            posts = get_author_posts(user)
+            author_posts = pd.concat([author_posts, posts], ignore_index=True)
+        author_posts.to_csv(AUTHOR_POSTS_FILENAME, index=False)
+    
+    return author_posts
+
+def get_author_tokens(author_activity):
+    sub_tokens = []
+    for text in tqdm(author_activity["text"]):
+        # remove urls
+        text = [w for w in text.split(" ") if not re.search(r"[/ \\]", w)]
+        #get tokens
+        tokens = [token.lower() for token in word_tokenize(" ".join(text)) 
+                if token.lower() not in SW
+                and token.isalpha()]
+        sub_tokens.append(tokens)
+        
+    author_activity["tokens"] = sub_tokens
+
+    def concat(series):
+        document = []
+        for tokens in series:
+            document.extend(tokens)
+        
+        return document
+
+    author_text_docs = author_activity.groupby('author')['tokens'].apply(lambda x: concat(x))
+    return author_text_docs
+
+def create_user_wordclouds(users, TF_IDF, df_submissions, height):
+    """
+    Creates wordclouds from the users given and a dictionary with their TF-IDF score
+    """
+    title_color = {
+    'Gryffindor': 'red',
+    'Slytherin': 'green',
+    'Hufflepuff': 'yellow',
+    'Ravenclaw': 'blue'
+    }
+    shield_mask = np.array(Image.open('wordcloud_contours/shield_contour.jpg'))
+    
+    width = int(len(users)/height)
+    fig, ax = plt.subplots(height,width, dpi = 300, figsize = (20,30))
+    titles = users
+    font = {'family': 'serif',
+            'weight': 'normal',
+            'size': 20,
+            }
+
+    i = 0    
+    for col in tqdm(range(width)):
+        for row in tqdm(range(height)):
+            user = users[i]
+            user_house = df_submissions[df_submissions['author'] == user]['house'].iloc[0]
+            user_color = title_color[user_house]
+            wordcloud = WordCloud(width = 400*width,
+                        height = 400*height,
+                        max_words=100,
+                        background_color ='white',
+                        mask=shield_mask,
+                        contour_width=3,
+                        contour_color=user_color).generate_from_frequencies(dict(TF_IDF[i]))
+            ax[row,col].imshow(wordcloud, interpolation='bilinear')
+            ax[row,col].set_axis_off()
+            ax[row,col].set_title(titles[i], fontdict = font)
+            i += 1
+        
+
+    plt.show()
+
+#####################################################################################################
+#INTERACTIONS ON R/HARRYPOTTER
+#####################################################################################################
+
+def get_comments(df_submissions=None, overwrite = False, date1 = None, date2 = None):
+    """
+    Gets comments from the submissions in df_submissions 
+    """
+    if os.path.exists(SUBREDDIT_COMMENTS_RAW) and not overwrite:
+        print('Loading existing raw data')
+        df_comments = pd.read_csv(SUBREDDIT_COMMENTS_RAW)
+        print('Loaded raw data')
+    else:
+        assert df_submissions, "Please specify a submissions dataframe"
+        # get comments on harrypotter subreddit
+        api = PushshiftAPI()
+        my_subreddit = "harrypotter"
+        date1 = int(datetime.datetime(2021, 1, 1).timestamp())
+        date2 = int(datetime.datetime(2021, 3, 25).timestamp())
+
+
+        # get comments in a for loop
+        comments = []
+        sub_ids = list(df_submissions[df_submissions["num_comments"] > 0]["id"])
+        N = 50 #split api call in N bits
+        step = len(sub_ids)/N
+        for i in tqdm(range(N)):
+            ids = sub_ids[int(round(i*step)):int(round((i+1)*step))]
+            gen_comments = api.search_comments(subreddit = my_subreddit,
+                                            after = date1,
+                                            before = date2,
+                                            link_id = ids,
+                                            filter=['author', 'score', 'body', 'id', 'link_id', 'parent_id', 'created_utc', 'author_flair_css_class'])
+            comments.extend(list(gen_comments))
+
+        # save csv
+        df_comments = pd.DataFrame([(p.d_["id"],
+                                p.d_["link_id"],
+                                p.d_["score"],
+                                p.d_["created_utc"],
+                                datetime.datetime.utcfromtimestamp(p.d_["created_utc"]).strftime("%Y-%m-%d"),
+                                p.d_["author"],
+                                p.d_["parent_id"],
+                                p.d_["author_flair_css_class"],
+                                p.d_["body"]) for p in comments], 
+                                columns = [ "id", "submission_id", "score", "created_utc", "creation_date", "author", "parent_id", "house_id", "text"])
+        df_comments.to_csv(SUBREDDIT_COMMENTS_RAW, index=False)
+    
+    return df_comments
+
+def preprocess_comments(df_comments=None, overwrite = False):
+    house_id = 'house_id'
+    if os.path.exists(SUBREDDIT_COMMENTS_PROCESSED) and not overwrite:
+        df_comments = pd.read_csv(SUBREDDIT_COMMENTS_PROCESSED)
+    else:
+        assert df_comments, "Please specify a comments dataframe"
+        # Preprocess
+        df_comments = df_comments.dropna(subset=[house_id]).reset_index(drop=True, inplace=False)
+        df_comments["house"] = df_comments[house_id].apply(lambda x: 'Gryffindor' if 'GR' in x
+                                                                    else 'Slytherin' if 'SL' in x
+                                                                    else 'Hufflepuff' if 'HF' in x
+                                                                    else 'Ravenclaw' if 'RV' in x
+                                                                    else None
+        )
+
+        # Drop nodes with non of the four houses
+        df_comments = df_comments.dropna(subset=['house']).reset_index(drop=True, inplace=False)
+
+        # dictionaries
+        comment_authors = dict(zip(df_comments["id"], df_comments["author"]))
+        parent = dict(zip(df_comments["id"], df_comments["parent_id"]))
+        submissions_authors = dict(zip(df_submissions["id"], df_submissions["author"]))
+        author_house = dict(zip(df_comments["author"], df_comments["house"]))
+
+        # function for getting author of parent id
+        def get_parent_author(comment_id):
+            parent_id = parent[comment_id]
+            t_parent_id = parent_id[:3]
+            parent_id = parent_id[3:]
+            
+            try:
+                if t_parent_id == "t1_":
+                    return comment_authors[parent_id]# if parent_id in comment_authors.keys else None
+                elif t_parent_id == "t3_":
+                    return submissions_authors[parent_id]
+                else:
+                    return -1
+            except KeyError:
+                return -1
+            
+        # create parent_author column in comments dataframe
+        df_comments["parent_author"] = list(map(get_parent_author, df_comments["id"])) #get_parent_author(comments.id)
+        
+        # add the house of the parent author to a column
+        df_comments["parent_house"] = [author_house[parent_author] if parent_author in author_house.keys() else "None" for parent_author in df_comments["parent_author"]]
+
+        # remove unwanted authors
+        df_comments.parent_author = df_comments.parent_author.replace(-1, "None")
+        df_comments = df_comments[(df_comments.author != "[deleted]") & (df_comments.parent_author != "[deleted]")]# remove deleted users
+
+
+        df_comments.to_csv(SUBREDDIT_COMMENTS_PROCESSED, index=False)
+    return df_comments
+
+def create_interactions(df_comments=None, overwrite = False):
+    if os.path.exists(SUBREDDIT_INTERACTIONS) and not overwrite:
+        with open(SUBREDDIT_INTERACTIONS, "rb") as file:
+            interactions = pickle.load(file)
+    else:
+        assert df_comments, "Please specify a comments dataframe"
+        # remove submissions, as they do not have a receiving house
+        interactions = df_comments[df_comments.parent_house != "None"].reset_index(drop=True, inplace=False)
+        interactions = interactions[["house", "parent_house", "text"]]
+
+        # group interactions for each vombination of receiving and sending house
+        interactions = interactions.groupby(["house", "parent_house"]).agg(list)
+        interactions = interactions.reset_index()
+        interactions["number_of_interactions"] = [len(t) for t in interactions.text]
+
+        # get text tokens
+        sub_tokens = []
+        for text in interactions.text:
+            tokens = [token.lower() for token in word_tokenize(" ".join(text)) 
+                    if token.lower() not in SW
+                    and token.isalpha()]
+            sub_tokens.append(tokens)
+
+        interactions["tokens"] = sub_tokens
+
+        # add TF-IDF scores
+        tf, tf_idf = TF_IDF(interactions.tokens, interactions.tokens)
+        interactions["TF"] = tf
+        interactions["TF_IDF"] = tf_idf
+
+        # add sentiment scores
+        interactions["vader"] = [vader_sentiment(t) for t in interactions.text]
+        interactions["happiness"] = [happiness(t) for t in interactions.tokens]
+        interactions["emotion_score"] = [emotion_score(t) for t in interactions.tokens]
+
+        with open(SUBREDDIT_INTERACTIONS, "wb") as file:
+            pickle.dump(interactions, file)
+
+    return interactions
+
+def interaction_wordclouds(interactions, freq_type = "TF_IDF", save_as = None):
+    """
+    Creates a wordcloud for each type of interaction based on the freq_type given as a column name of the interactions data frame
+    """
+    houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+    shield_mask = np.array(Image.open('wordcloud_contours/shield_contour.jpg'))
+
+
+    width, height = 4, 4
+    fig, ax = plt.subplots(height,width, dpi = 300, figsize = (20,30))
+    # titles = [f"{h1} to {h2}" for h1 in houses for h2 in houses]
+    font = {'family': 'serif',
+            'weight': 'normal',
+            'size': 20,
+            }
+
+    i = 0    
+    for col in tqdm(range(width)):
+        for row in tqdm(range(height)):
+            wordcloud = WordCloud(width = 400*width,
+                        height = 400*height,
+                        max_words=100,
+                        background_color ='white',
+                        mask=shield_mask,
+                        contour_width=3,
+                        contour_color="blue").generate_from_frequencies(dict(interactions[freq_type][i]))
+            ax[row,col].imshow(wordcloud, interpolation='bilinear')
+            ax[row,col].set_axis_off()
+            ax[row,col].set_title(f"{interactions.house[i]} to {interactions.parent_house[i]}", fontdict = font, backgroundcolor='white')
+            i += 1
+    if save_as:    
+        plt.savefig(save_as)
+    plt.show()
