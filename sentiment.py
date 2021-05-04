@@ -71,7 +71,7 @@ def TF_IDF(docs_to_analyse, all_docs):
         idf = np.log(N_docs/sum([term in doc_set for doc_set in doc_sets]))
         IDF[term] = idf
     TF_IDF = []
-
+    print(len(TF))
     for tf in TF:
         tf_idf = nltk.FreqDist({word:count * IDF[word] for word, count in tf.most_common()})
         TF_IDF.append(tf_idf)
