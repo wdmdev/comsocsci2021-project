@@ -1,0 +1,8 @@
+#HPNetwork {
+    width: 100%;
+    height: 460px;
+    background-color: #ffffff;
+    border: 1px solid lightgray;
+    position: relative;
+    float: left;
+}
