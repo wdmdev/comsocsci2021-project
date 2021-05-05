@@ -7,12 +7,17 @@ import "assets/styles/tailwind.css";
 
 // views without layouts
 import Index from "views/Index.js";
+import Networks from "views/Networks.js";
+import PlotStats from "views/PlotStats.js";
+import Wordclouds from "views/Wordclouds.js";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      {/* add routes without layouts */}
       <Route path="/comsocsci2021-project" exact component={Index} />
+      <Route path="/plotstats" exact component={PlotStats} />
+      <Route path="/networks" exact component={Networks} />
+      <Route path="/wordclouds" exact component={Wordclouds} />
       {/* add redirect for first page */}
       <Redirect from="*" to="/comsocsci2021-project" />
     </Switch>

@@ -7,7 +7,7 @@ class InteractiveSection extends React.Component {
 
     render() {
         return (
-            <div className="container mx-auto hide-overflow">
+            <div className="container mx-auto py-40 hide-overflow">
               <div className="flex flex-wrap items-center">
                 <div className="px-12 md:px-4 mr-auto ml-auto -mt-48 pt-20">
                   <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">

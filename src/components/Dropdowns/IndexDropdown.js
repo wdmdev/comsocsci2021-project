@@ -108,6 +108,12 @@ const IndexDropdown = () => {
           to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
+          Plots and Stats
+        </Link>
+        <Link
+          to="/"
+          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+        >
           Networks
         </Link>
         <Link
