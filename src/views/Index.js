@@ -44,8 +44,9 @@ export default function Index() {
         </div>
 
         <img
-          className="img-round absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
+          className="rounded-lg absolute shadow b-auto right-0 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
           src={require("assets/img/HP_houses.jpg").default}
+          style={{marginTop: '-4%', marginRight: '4%', width: '700px'}}
           alt="Harry Potter Hogwarts Houses Cartoon"
         />
       </section>
