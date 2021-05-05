@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/comsocsci2021-project/static/css/main.7d4b5037.chunk.css",
-    "main.js": "/comsocsci2021-project/static/js/main.c776ef04.chunk.js",
-    "main.js.map": "/comsocsci2021-project/static/js/main.c776ef04.chunk.js.map",
+    "main.css": "/comsocsci2021-project/static/css/main.b001adfb.chunk.css",
+    "main.js": "/comsocsci2021-project/static/js/main.8269bf1a.chunk.js",
+    "main.js.map": "/comsocsci2021-project/static/js/main.8269bf1a.chunk.js.map",
     "runtime-main.js": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js",
     "runtime-main.js.map": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js.map",
-    "static/css/2.e48c4948.chunk.css": "/comsocsci2021-project/static/css/2.e48c4948.chunk.css",
-    "static/js/2.f6d20d94.chunk.js": "/comsocsci2021-project/static/js/2.f6d20d94.chunk.js",
-    "static/js/2.f6d20d94.chunk.js.map": "/comsocsci2021-project/static/js/2.f6d20d94.chunk.js.map",
+    "static/css/2.05bd2ea0.chunk.css": "/comsocsci2021-project/static/css/2.05bd2ea0.chunk.css",
+    "static/js/2.f9d506aa.chunk.js": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js",
+    "static/js/2.f9d506aa.chunk.js.map": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js.map",
     "index.html": "/comsocsci2021-project/index.html",
-    "static/css/2.e48c4948.chunk.css.map": "/comsocsci2021-project/static/css/2.e48c4948.chunk.css.map",
-    "static/css/main.7d4b5037.chunk.css.map": "/comsocsci2021-project/static/css/main.7d4b5037.chunk.css.map",
-    "static/js/2.f6d20d94.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.f6d20d94.chunk.js.LICENSE.txt",
+    "static/css/2.05bd2ea0.chunk.css.map": "/comsocsci2021-project/static/css/2.05bd2ea0.chunk.css.map",
+    "static/css/main.b001adfb.chunk.css.map": "/comsocsci2021-project/static/css/main.b001adfb.chunk.css.map",
+    "static/js/2.f9d506aa.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js.LICENSE.txt",
     "static/media/HP_houses.jpg": "/comsocsci2021-project/static/media/HP_houses.bb5460a4.jpg",
     "static/media/angular.jpg": "/comsocsci2021-project/static/media/angular.b5045666.jpg",
     "static/media/bootstrap.jpg": "/comsocsci2021-project/static/media/bootstrap.bd712487.jpg",
@@ -39,9 +39,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.7b44c633.js",
-    "static/css/2.e48c4948.chunk.css",
-    "static/js/2.f6d20d94.chunk.js",
-    "static/css/main.7d4b5037.chunk.css",
-    "static/js/main.c776ef04.chunk.js"
+    "static/css/2.05bd2ea0.chunk.css",
+    "static/js/2.f9d506aa.chunk.js",
+    "static/css/main.b001adfb.chunk.css",
+    "static/js/main.8269bf1a.chunk.js"
   ]
 }
