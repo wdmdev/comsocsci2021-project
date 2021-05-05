@@ -11,38 +11,25 @@ class DataSection extends React.Component {
                       Data
                   </h3>
                   <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    Every element that you need in a product comes built in as a
-                    component. All components fit perfectly with each other and can
-                    have different colours.
+                    We have worked on Harry Potter text data from Github (link here) and user data from the r/harrypotter subreddit. <br/>
+                    We also got help from the hp-lexicon.com where we scraped data about important characters, their Hogwarts Houses and information about the book chapters.
                   </p>
                   <div className="block pb-6">
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Buttons
+                      Github Text Book Data
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Inputs
+                      Reddit User Data
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Labels
+                      PushShift API
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Menus
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Navbars
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Pagination
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Progressbars
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Typography
+                      Nickname Cleaning
                     </span>
                   </div>
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=nr-index"
+                    href="/"
                     target="_blank"
                     className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                   >

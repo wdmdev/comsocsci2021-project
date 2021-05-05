@@ -113,38 +113,24 @@ class AnalysisSection extends React.Component {
                     Data Analysis
                   </h3>
                   <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    In order to create a great User Experience some components
-                    require JavaScript. In this way you can manipulate the elements
-                    on the page and give more options to your users.
+                    In order to compare the Harry Potter Hogwarts Houses and the characters interactions 
+                    with that of reddit users from we did ... (under construction)
                   </p>
                   <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    We created a set of Components that are dynamic and come to help
-                    you.
+                    We made dirrent experiments
                   </p>
                   <div className="block pb-6">
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Alerts
+                      NxNetwork
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Dropdowns
+                      Modularity
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Menus
+                      TF-IDF
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Modals
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Navbars
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Popovers
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Tabs
-                    </span>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Tooltips
+                      Louvain
                     </span>
                   </div>
                   <a

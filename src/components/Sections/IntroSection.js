@@ -13,8 +13,8 @@ class IntroSection extends React.Component {
                     </h2>
                     <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
                         We have created a network analysis of the original 7 Harry Potter books and combined them
-                        with a network analysis of the r/harrypotter subreddit.
-                        Scroll down the page to see what we found or take a look at the Jupyter Notebook to get 
+                        with a network analysis of 
+                        the <a className="text-blueGray-700 hover:text-blueGray-500" href="https://www.reddit.com/r/harrypotter/" target="_blank">r/harrypotter</a> subreddit. Scroll down the page to see what we found or take a look at the Jupyter Notebook to get 
                         behind the scenes of the more technical stuff.
                     </p>
                     <div className="mt-12">
