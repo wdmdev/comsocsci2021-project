@@ -19,6 +19,7 @@
     "react-native-webview": "^11.4.3",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
+    "react-router-hash-link": "^2.4.1",
     "react-scripts": "4.0.3",
     "tailwindcss": "2.0.4",
     "vis-network": "^9.0.4"

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 import { createPopper } from "@popperjs/core";
 
 const IndexDropdown = () => {
@@ -41,22 +42,26 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
+        <HashLink
+          to="/#data"
+        >
           Data
+        </HashLink>
         </span>
         <Link
-          to="/admin/dashboard"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Data Sources
         </Link>
         <Link
-          to="/admin/settings"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Features
         </Link>
         <Link
-          to="/admin/tables"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Preprocessing
@@ -67,22 +72,24 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Analysis
+        <HashLink to="/#analysis" >
+          Data Analysis
+        </HashLink>
         </span>
         <Link
-          to="/auth/login"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Harry Potter
         </Link>
         <Link
-          to="/auth/register"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Reddit Forum
         </Link>
         <Link
-          to="/auth/register"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Comparison
@@ -93,16 +100,18 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
+        <HashLink to="/#interactive" >
           Interactive
+        </HashLink>
         </span>
         <Link
-          to="/landing"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Networks
         </Link>
         <Link
-          to="/profile"
+          to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Wordclouds
