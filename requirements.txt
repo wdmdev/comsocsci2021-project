@@ -7,3 +7,7 @@ networkx
 bs4
 psaw
 wordcloud
+matplotlib
+python-louvain
+WordCloud
+pyvis
