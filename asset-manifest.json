@@ -1,20 +1,18 @@
 {
   "files": {
     "main.css": "/comsocsci2021-project/static/css/main.c0af0ab4.chunk.css",
-    "main.js": "/comsocsci2021-project/static/js/main.177ba203.chunk.js",
-    "main.js.map": "/comsocsci2021-project/static/js/main.177ba203.chunk.js.map",
+    "main.js": "/comsocsci2021-project/static/js/main.80f9fa54.chunk.js",
+    "main.js.map": "/comsocsci2021-project/static/js/main.80f9fa54.chunk.js.map",
     "runtime-main.js": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js",
     "runtime-main.js.map": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js.map",
-    "static/css/2.05bd2ea0.chunk.css": "/comsocsci2021-project/static/css/2.05bd2ea0.chunk.css",
-    "static/js/2.f9d506aa.chunk.js": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js",
-    "static/js/2.f9d506aa.chunk.js.map": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js.map",
+    "static/css/2.29613607.chunk.css": "/comsocsci2021-project/static/css/2.29613607.chunk.css",
+    "static/js/2.8d4a84f1.chunk.js": "/comsocsci2021-project/static/js/2.8d4a84f1.chunk.js",
+    "static/js/2.8d4a84f1.chunk.js.map": "/comsocsci2021-project/static/js/2.8d4a84f1.chunk.js.map",
     "index.html": "/comsocsci2021-project/index.html",
-    "static/css/2.05bd2ea0.chunk.css.map": "/comsocsci2021-project/static/css/2.05bd2ea0.chunk.css.map",
+    "static/css/2.29613607.chunk.css.map": "/comsocsci2021-project/static/css/2.29613607.chunk.css.map",
     "static/css/main.c0af0ab4.chunk.css.map": "/comsocsci2021-project/static/css/main.c0af0ab4.chunk.css.map",
-    "static/js/2.f9d506aa.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js.LICENSE.txt",
+    "static/js/2.8d4a84f1.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.8d4a84f1.chunk.js.LICENSE.txt",
     "static/media/HP_houses.jpg": "/comsocsci2021-project/static/media/HP_houses.bb5460a4.jpg",
-    "static/media/angular.jpg": "/comsocsci2021-project/static/media/angular.b5045666.jpg",
-    "static/media/bootstrap.jpg": "/comsocsci2021-project/static/media/bootstrap.bd712487.jpg",
     "static/media/component-info-2.png": "/comsocsci2021-project/static/media/component-info-2.5212a3a6.png",
     "static/media/component-info-card.png": "/comsocsci2021-project/static/media/component-info-card.d19a4464.png",
     "static/media/component-menu.png": "/comsocsci2021-project/static/media/component-menu.418bd949.png",
@@ -22,26 +20,16 @@
     "static/media/data.zip": "/comsocsci2021-project/static/media/data.30e14389.zip",
     "static/media/documentation.png": "/comsocsci2021-project/static/media/documentation.014ebef5.png",
     "static/media/all.min.css": "/comsocsci2021-project/static/media/fa-solid-900.efbd5d20.eot",
-    "static/media/github.svg": "/comsocsci2021-project/static/media/github.6c955556.svg",
-    "static/media/google.svg": "/comsocsci2021-project/static/media/google.eae9aa93.svg",
     "static/media/landing.jpg": "/comsocsci2021-project/static/media/landing.8150f1b0.jpg",
     "static/media/login.jpg": "/comsocsci2021-project/static/media/login.9c1ecd37.jpg",
     "static/media/notebook.zip": "/comsocsci2021-project/static/media/notebook.01db9925.zip",
-    "static/media/profile.jpg": "/comsocsci2021-project/static/media/profile.c62f8a5b.jpg",
-    "static/media/react.jpg": "/comsocsci2021-project/static/media/react.0e8c9066.jpg",
-    "static/media/register_bg_2.png": "/comsocsci2021-project/static/media/register_bg_2.4f2cb0ac.png",
-    "static/media/sketch.jpg": "/comsocsci2021-project/static/media/sketch.a6af780a.jpg",
-    "static/media/team-1-800x800.jpg": "/comsocsci2021-project/static/media/team-1-800x800.fa5a7ac2.jpg",
-    "static/media/team-2-800x800.jpg": "/comsocsci2021-project/static/media/team-2-800x800.3e08ef14.jpg",
-    "static/media/team-3-800x800.jpg": "/comsocsci2021-project/static/media/team-3-800x800.19201574.jpg",
-    "static/media/team-4-470x470.png": "/comsocsci2021-project/static/media/team-4-470x470.4ef82ef4.png",
-    "static/media/vue.jpg": "/comsocsci2021-project/static/media/vue.43bd93a8.jpg"
+    "static/media/profile.jpg": "/comsocsci2021-project/static/media/profile.c62f8a5b.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.7b44c633.js",
-    "static/css/2.05bd2ea0.chunk.css",
-    "static/js/2.f9d506aa.chunk.js",
+    "static/css/2.29613607.chunk.css",
+    "static/js/2.8d4a84f1.chunk.js",
     "static/css/main.c0af0ab4.chunk.css",
-    "static/js/main.177ba203.chunk.js"
+    "static/js/main.80f9fa54.chunk.js"
   ]
 }
