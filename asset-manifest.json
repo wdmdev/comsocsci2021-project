@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/comsocsci2021-project/static/css/main.b001adfb.chunk.css",
-    "main.js": "/comsocsci2021-project/static/js/main.8269bf1a.chunk.js",
-    "main.js.map": "/comsocsci2021-project/static/js/main.8269bf1a.chunk.js.map",
+    "main.css": "/comsocsci2021-project/static/css/main.c0af0ab4.chunk.css",
+    "main.js": "/comsocsci2021-project/static/js/main.177ba203.chunk.js",
+    "main.js.map": "/comsocsci2021-project/static/js/main.177ba203.chunk.js.map",
     "runtime-main.js": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js",
     "runtime-main.js.map": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js.map",
     "static/css/2.05bd2ea0.chunk.css": "/comsocsci2021-project/static/css/2.05bd2ea0.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.f9d506aa.chunk.js.map": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js.map",
     "index.html": "/comsocsci2021-project/index.html",
     "static/css/2.05bd2ea0.chunk.css.map": "/comsocsci2021-project/static/css/2.05bd2ea0.chunk.css.map",
-    "static/css/main.b001adfb.chunk.css.map": "/comsocsci2021-project/static/css/main.b001adfb.chunk.css.map",
+    "static/css/main.c0af0ab4.chunk.css.map": "/comsocsci2021-project/static/css/main.c0af0ab4.chunk.css.map",
     "static/js/2.f9d506aa.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.f9d506aa.chunk.js.LICENSE.txt",
     "static/media/HP_houses.jpg": "/comsocsci2021-project/static/media/HP_houses.bb5460a4.jpg",
     "static/media/angular.jpg": "/comsocsci2021-project/static/media/angular.b5045666.jpg",
@@ -41,7 +41,7 @@
     "static/js/runtime-main.7b44c633.js",
     "static/css/2.05bd2ea0.chunk.css",
     "static/js/2.f9d506aa.chunk.js",
-    "static/css/main.b001adfb.chunk.css",
-    "static/js/main.8269bf1a.chunk.js"
+    "static/css/main.c0af0ab4.chunk.css",
+    "static/js/main.177ba203.chunk.js"
   ]
 }
