@@ -74,9 +74,11 @@ export default function Index() {
         <div className="container mx-auto ">
           <div className="flex flex-wrap items-center">
             <div className="px-12 md:px-4 mr-auto ml-auto -mt-32">
-              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
-                <HPNetwork network='assets/networks/HPNetwork.js' id='HPNetwork'/> {/* Pyvis Harry Potter Character Network */}
-                <blockquote className="relative p-8 mb-4">
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500"
+              >
+                {/* Pyvis Harry Potter Character Network */}
+                <HPNetwork network='assets/networks/HPNetwork.js' id='HPNetwork'/> 
+                <blockquote className="relative p-8 mb-4" >
                   <svg
                     preserveAspectRatio="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -89,11 +91,15 @@ export default function Index() {
                     ></polygon>
                   </svg>
                   <h4 className="text-xl font-bold text-white">
-                    Explore the character network of Harry Potter
+                    Explore the character network of Harry Potter - It's Interactive!
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
-                    We have created an interactive network using <a href="https://pyvis.readthedocs.io/en/latest/" target="_blank">pyvis</a>.
-                    The network shows the Harry Potter character network according to the character's Hogwarts Houses <br/>
+                    We have created a network using <a href="https://pyvis.readthedocs.io/en/latest/" target="_blank">pyvis</a>. 
+                    The network shows the Harry Potter character network. <br/>
+                    Each node is a character with the color of their respective Hogwarts House. 
+                    The edges are colored according to the sentiment in how the characters communicate with each other.
+                    So green edges means positive communication between the characters, probably good friends, while red edges means... well they're not exactly friends.
+                    Click around pull the nodes and investigate the network of Harry Potter! <br/>
                   </p>
                 </blockquote>
               </div>
