@@ -3,7 +3,7 @@ import React from 'react';
 //Style
 import 'vis-network/styles/vis-network.css';
 import "assets/networks/HPNetwork.css";
-import drawGraph from 'assets/networks/HPNetwork.js';
+import drawGraph from 'assets/networks/HPNetwork2.js';
 
 class HPNetwork extends React.Component {
 

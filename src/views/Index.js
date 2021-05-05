@@ -52,53 +52,30 @@ export default function Index() {
       </section>
 
       <section className="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
-        <div
-          className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
-          style={{ transform: "translateZ(0)" }}
-        >
-          <svg
-            className="absolute bottom-0 overflow-hidden"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            version="1.1"
-            viewBox="0 0 2560 100"
-            x="0"
-            y="0"
-          >
-            <polygon
-              className="text-blueGray-100 fill-current"
-              points="2560 0 2560 100 0 100"
-            ></polygon>
-          </svg>
-        </div>
         <div className="container mx-auto ">
           <div className="flex flex-wrap items-center">
             <div className="px-12 md:px-4 mr-auto ml-auto -mt-32">
-              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500"
-              >
-                {/* Pyvis Harry Potter Character Network */}
-                <HPNetwork network='assets/networks/HPNetwork.js' id='HPNetwork'/> 
-                <blockquote className="relative p-8 mb-4" >
-                  <svg
-                    preserveAspectRatio="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 583 95"
-                    className="absolute left-0 w-full block h-95-px -top-94-px"
-                  >
-                    <polygon
-                      points="-30,95 583,95 583,65"
-                      className="text-lightBlue-500 fill-current"
-                    ></polygon>
-                  </svg>
-                  <h4 className="text-xl font-bold text-white">
-                    Explore the character network of Harry Potter - It's Interactive!
-                  </h4>
-                  <p className="text-md font-light mt-2 text-white">
-                    We have created a network using <a href="https://pyvis.readthedocs.io/en/latest/" target="_blank">pyvis</a>. 
+              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+                <i className="fas fa-sitemap text-xl"></i>
+              </div>
+              <h3 className="text-3xl mb-2 font-semibold leading-normal"> The Character Network </h3>
+              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                    We have created a network using <a className="text-blueGray-700 hover:text-blueGray-500" href="https://pyvis.readthedocs.io/en/latest/" target="_blank">pyvis</a>. 
                     The network shows the Harry Potter character network. <br/>
                     Each node is a character with the color of their respective Hogwarts House. 
                     The edges are colored according to the sentiment in how the characters communicate with each other.
                     So green edges means positive communication between the characters, probably good friends, while red edges means... well they're not exactly friends.
+              </p>
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
+                {/* Pyvis Harry Potter Character Network */}
+                <HPNetwork network='assets/networks/HPNetwork.js' id='HPNetwork'/> 
+                <blockquote className="relative p-8 mb-4" >
+                  <h4 className="text-xl font-bold text-white">
+                    Explore the character network of Harry Potter - Click on the graph to interact!
+                  </h4>
+                  <p className="text-md font-light mt-2 text-white">
+                    Hover over edges and nodes to see their attributes. <br/>
+                    You can filter out nodes and edges by selecting and deleting them. (Click or Ctrl + Click for multiselect)<br/> 
                     Click around pull the nodes and investigate the network of Harry Potter! <br/>
                   </p>
                 </blockquote>
@@ -110,9 +87,6 @@ export default function Index() {
         <div className="container mx-auto overflow-hidden pb-20">
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <i className="fas fa-sitemap text-xl"></i>
-              </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal">
                 CSS Components
               </h3>
