@@ -188,7 +188,7 @@ def network_analysis(G, characters_by_communities_reverse, names, plot_type):
     cols = [C[name] for name in names_]
     modularity = []
     for i in range(1000):
-        config_model = nx.generators.degree_seq.directed_configuration_model(N,M, create_using=nx.DiGraph())
+        config_model = nx.generators.degree_seq.directed_configuration_model(N,M, create_using=nx.DiGraph(), seed = np.random.randint(0, 10e4))
         for i, (node, data) in enumerate(config_model.nodes(data = True)):
             data['group'] = cols[i]
         partition2 = [set([node for node, data in config_model.nodes(data = True) if data['group'] == val]) for val in colors.values()]
@@ -258,3 +258,103 @@ def network_analysis(G, characters_by_communities_reverse, names, plot_type):
         louvain_comparison()
     elif plot_type == "degree":
         plot_degree_distribution()
+
+
+def interactions_df(interactions_list, characters_by_communities_reverse, names, chapter_info):
+    fname = 'data/interaction_df.csv'
+    if os.path.exists(fname):
+        with open('data/interaction_df.csv', 'rb') as file:
+            df = pkl.load(file)
+    else:
+        SW = stopwords.words("english")
+        houses = {val:characters_by_communities_reverse[key] for key, val in names.items() if key in characters_by_communities_reverse.keys()}
+        
+        df = pd.DataFrame(interactions_list, columns = ["Chapter", "Source", "Target", "Interaction"])
+        df['Tokens'] = df.Interaction.apply(lambda x:  [word.lower() for word in re.sub(r'[.!,,’?]','', x).split(" ") if word.isalpha() and word not in SW])
+        df['Source_house'] = df.Source.apply(lambda x: houses[x])
+        df['Target_house'] = df.Target.apply(lambda x: houses[x])
+        df['Sentiment'] = df.Interaction.apply(lambda x: vader_sentiment(re.sub('  ', ' ', x)))
+        df['Happiness'] = df.Tokens.apply(lambda x: happiness(x))
+        df['Happiness_norm'] = df.Happiness.apply(lambda x: (x-1)/(9-1))
+        df['Book'] =  df.Chapter.apply(lambda x: chapter_info.Book[chapter_info['Global Chapter'] == x+1].values[0])
+
+        pkl.dump(df,  open(fname,"wb"))
+        
+    return df
+
+def WordCloudsCharacters(df, Selected_characters):
+    H = df.groupby('Source').agg({'Tokens': 'sum'})
+
+    width, height = 4, 2
+    fig, ax = plt.subplots(height,width, dpi = 100, figsize = (10,10))
+
+    TF, IDF = TF_IDF(H.loc[Selected_characters].Tokens, H.Tokens)
+    for i in tqdm(range(len(Selected_characters))):
+        wordcloud = WordCloud(
+                    width = 150* width,
+                    height = 500*height,
+                    max_words=100,
+                    background_color ='white',
+                    contour_width=3,
+                    contour_color="blue").generate_from_frequencies(dict(IDF[i]))
+        ax[i // width, i % width].imshow(wordcloud, interpolation='bilinear')
+        ax[i // width, i % width].set_axis_off()
+        ax[i // width, i % width].set_title(Selected_characters[i])
+    fig.tight_layout()
+    plt.show()
+
+def emotion_bars(df, source, targets):
+    H = df[df['Source'] == source].groupby(['Chapter', 'Target']).agg({'Tokens':'sum', 'Sentiment':'mean'}).unstack()
+    fig, ax = plt.subplots(dpi = 150, figsize = (20,5))
+
+    beta = 15
+    width = .08
+    N = len(targets)
+    for i in range(N):
+        E = H.Tokens[targets[i]].dropna().apply(lambda x: pd.Series(emotion_score(x))).mean()
+        ax.bar(np.arange(8) + width *(N // 2 + i), np.exp(beta*E) / np.sum(np.exp(beta*E)), width = width,
+                                                                                            zorder = 3,
+                                                                                            label = targets[i],
+                                                                                            alpha = .8)
+
+    ax.set_xticks(np.arange(8) + width *N)
+    ax.set_xticklabels(E.index)
+    ax.set_title(f'Softmax Distribution of Emotions for {source}')
+    ax.set_ylabel('Probability')
+
+    ax.grid(linestyle = '--')
+    ax.legend()
+    plt.show()
+
+
+def WordCloudsHouses(df):
+    D_house = df.groupby(['Source_house', 'Target_house']).agg({'Tokens':'sum'}).reset_index()
+    TF, IDF = TF_IDF(D_house.Tokens, D_house.Tokens)
+    width = 4
+    height = 4
+    fig, ax = plt.subplots(4,4, dpi = 100, figsize = (20,20))
+    for i in tqdm(range(16)):
+            wordcloud = WordCloud(width = 400*width,
+                        height = 400*height,
+                        max_words=100,
+                        background_color ='white',
+                        # mask=shield_mask,
+                        contour_width=3,
+                        contour_color="blue").generate_from_frequencies(dict(IDF[i]))
+            ax[i // width,i % width].imshow(wordcloud, interpolation='bilinear')
+            ax[i // width,i % width].set_axis_off()
+            ax[i // width,i % width].set_title(f"{D_house.loc[i].Source_house} to {D_house.loc[i].Target_house}", backgroundcolor='white')
+
+
+def TimeSeries(df, sentiment = 'Happiness'):
+    H = df.groupby(['Book', 'Chapter']).agg({sentiment:'mean'}).reset_index()
+    fig, ax = plt.subplots(dpi = 150, figsize = (15,7))
+    for i in range(1,8):
+        book = H[H.Book == i]
+        ax.plot(book.Chapter, book[sentiment], marker = '.')
+    ax.axhline(H[sentiment].mean(), linestyle = '--', alpha = .4, color = 'black', label = f'Mean {sentiment}')
+    ax.set_xlabel('Global Chapter')
+    ax.set_ylabel(f'sentiment Score')
+    ax.set_title(f'A timeline of the {sentiment} in Harry Potter')
+    ax.legend()
+    plt.show()

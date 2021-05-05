@@ -139,7 +139,10 @@ def get_author_subreddits(authors, date1=None, date2 = None):
                         p.d_["subreddit_id"]) 
                         for p in results], 
                         columns = ["author", "subreddit", 'subreddit_id'])
-
+    
+    get_house = lambda x: df_submissions[df_submissions.author == x].house.iloc[0] if x in list(df_submissions.author) else None
+    author_subreddits["house"] = author_subreddits.author.apply(get_house)
+    
     return author_subreddits
 
 
