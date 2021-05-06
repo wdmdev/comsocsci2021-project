@@ -1,21 +1,23 @@
 {
   "files": {
     "main.css": "/comsocsci2021-project/static/css/main.c0af0ab4.chunk.css",
-    "main.js": "/comsocsci2021-project/static/js/main.e5000877.chunk.js",
-    "main.js.map": "/comsocsci2021-project/static/js/main.e5000877.chunk.js.map",
+    "main.js": "/comsocsci2021-project/static/js/main.dae3da45.chunk.js",
+    "main.js.map": "/comsocsci2021-project/static/js/main.dae3da45.chunk.js.map",
     "runtime-main.js": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js",
     "runtime-main.js.map": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js.map",
     "static/css/2.29613607.chunk.css": "/comsocsci2021-project/static/css/2.29613607.chunk.css",
-    "static/js/2.946abf94.chunk.js": "/comsocsci2021-project/static/js/2.946abf94.chunk.js",
-    "static/js/2.946abf94.chunk.js.map": "/comsocsci2021-project/static/js/2.946abf94.chunk.js.map",
+    "static/js/2.145c3b72.chunk.js": "/comsocsci2021-project/static/js/2.145c3b72.chunk.js",
+    "static/js/2.145c3b72.chunk.js.map": "/comsocsci2021-project/static/js/2.145c3b72.chunk.js.map",
     "index.html": "/comsocsci2021-project/index.html",
     "static/css/2.29613607.chunk.css.map": "/comsocsci2021-project/static/css/2.29613607.chunk.css.map",
     "static/css/main.c0af0ab4.chunk.css.map": "/comsocsci2021-project/static/css/main.c0af0ab4.chunk.css.map",
-    "static/js/2.946abf94.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.946abf94.chunk.js.LICENSE.txt",
+    "static/js/2.145c3b72.chunk.js.LICENSE.txt": "/comsocsci2021-project/static/js/2.145c3b72.chunk.js.LICENSE.txt",
     "static/media/HP_houses.jpg": "/comsocsci2021-project/static/media/HP_houses.bb5460a4.jpg",
+    "static/media/combined-data.jpg": "/comsocsci2021-project/static/media/combined-data.fdad7ba7.jpg",
     "static/media/data.zip": "/comsocsci2021-project/static/media/data.30e14389.zip",
     "static/media/all.min.css": "/comsocsci2021-project/static/media/fa-solid-900.efbd5d20.eot",
     "static/media/gryffindor.jpg": "/comsocsci2021-project/static/media/gryffindor.d033f4c3.jpg",
+    "static/media/harry-potter-books.jpg": "/comsocsci2021-project/static/media/harry-potter-books.218da2c4.jpg",
     "static/media/harrypotterfandomdata.png": "/comsocsci2021-project/static/media/harrypotterfandomdata.89c1553e.png",
     "static/media/hplexicon.png": "/comsocsci2021-project/static/media/hplexicon.85b861ff.png",
     "static/media/hufflepuff.jpg": "/comsocsci2021-project/static/media/hufflepuff.8c1f2c98.jpg",
@@ -24,15 +26,16 @@
     "static/media/plotstatspage.png": "/comsocsci2021-project/static/media/plotstatspage.cd8864f9.png",
     "static/media/ravenclaw.jpg": "/comsocsci2021-project/static/media/ravenclaw.e4f66bcb.jpg",
     "static/media/reddit.svg": "/comsocsci2021-project/static/media/reddit.e6b9279a.svg",
-    "static/media/redditdata.png": "/comsocsci2021-project/static/media/redditdata.28d4eae0.png",
+    "static/media/redditdata.png": "/comsocsci2021-project/static/media/redditdata.6a097cad.png",
     "static/media/slytherin.jpg": "/comsocsci2021-project/static/media/slytherin.a8340f1d.jpg",
+    "static/media/wiki-fandom-logo.webp": "/comsocsci2021-project/static/media/wiki-fandom-logo.349d8496.webp",
     "static/media/wordcloudpage.png": "/comsocsci2021-project/static/media/wordcloudpage.cfd8b271.png"
   },
   "entrypoints": [
     "static/js/runtime-main.7b44c633.js",
     "static/css/2.29613607.chunk.css",
-    "static/js/2.946abf94.chunk.js",
+    "static/js/2.145c3b72.chunk.js",
     "static/css/main.c0af0ab4.chunk.css",
-    "static/js/main.e5000877.chunk.js"
+    "static/js/main.dae3da45.chunk.js"
   ]
 }
