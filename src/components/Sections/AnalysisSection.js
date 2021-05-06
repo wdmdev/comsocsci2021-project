@@ -134,8 +134,7 @@ class AnalysisSection extends React.Component {
                     </span>
                   </div>
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=nr-index"
-                    target="_blank"
+                    href="/analysis"
                     className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                   >
                     View all{" "}

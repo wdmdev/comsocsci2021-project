@@ -29,8 +29,7 @@ class DataSection extends React.Component {
                     </span>
                   </div>
                   <a
-                    href="/"
-                    target="_blank"
+                    href="/data"
                     className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                   >
                     View All{" "}

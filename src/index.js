@@ -11,6 +11,9 @@ import Networks from "views/Networks.js";
 import PlotStats from "views/PlotStats.js";
 import Wordclouds from "views/Wordclouds.js";
 
+import Data from "views/Data.js";
+import Analysis from "views/Analysis.js";
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -18,6 +21,8 @@ ReactDOM.render(
       <Route path="/plotstats" exact component={PlotStats} />
       <Route path="/networks" exact component={Networks} />
       <Route path="/wordclouds" exact component={Wordclouds} />
+      <Route path="/data" exact component={Data} />
+      <Route path="/analysis" exact component={Analysis} />
       {/* add redirect for first page */}
       <Redirect from="*" to="/comsocsci2021-project" />
     </Switch>
