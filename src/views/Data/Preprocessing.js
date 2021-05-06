@@ -4,7 +4,7 @@ class Preprocessing extends React.Component {
 
     render () {
         return (
-            <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
+            <section id="datapreprocessing" className="header relative pt-16 items-center flex h-screen max-h-860-px">
                 <div className="ml-auto mr-auto mt-48"
                      style={{width:'70%'}}
                 >

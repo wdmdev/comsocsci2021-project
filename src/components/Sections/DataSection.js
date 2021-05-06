@@ -81,7 +81,7 @@ class DataSection extends React.Component {
                         />
                         <img
                           alt="..."
-                          src={require("assets/img/component-btn.png").default}
+                          src={require("assets/img/github-btn.png").default}
                           className="w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px"
                           style={{marginTop: '-70px'}}
                         />
