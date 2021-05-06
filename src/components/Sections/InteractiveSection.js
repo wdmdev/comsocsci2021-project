@@ -8,10 +8,10 @@ class InteractiveSection extends React.Component {
           <>
            <div className="justify-center text-center flex flex-wrap mt-24">
               <div id="interactive" className="w-full md:w-6/12 px-12 md:px-4" style={{marginTop: '-250px'}}>
-                <h2 className="font-semibold text-4xl">Interactive Demos</h2>
+                <h2 className="font-semibold text-4xl">Insights and Interactive Demos</h2>
                 <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-                  We have gathered the project data in an interactive format for you to enjoy. <br/>
-                  Take the demos we made for you and start playing with them to learn more about the data!
+                  We have gathered insights from the analysis plus some interactive networks for you to enjoy. <br/>
+                  Take the demos we made for you and start playing around to learn more about the data!
                 </p>
               </div>
             </div>
@@ -37,7 +37,7 @@ class InteractiveSection extends React.Component {
 
                     <div className="w-full lg:w-4/12 px-4">
                       <h5 className="text-xl font-semibold pb-4 text-center">
-                        Networks
+                        Wordclouds
                       </h5>
                       <Link to="/networks">
                         <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
@@ -52,7 +52,7 @@ class InteractiveSection extends React.Component {
 
                     <div className="w-full lg:w-4/12 px-4">
                       <h5 className="text-xl font-semibold pb-4 text-center">
-                        Wordclouds
+                        Networks
                       </h5>
                       <Link to="/wordclouds">
                         <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">

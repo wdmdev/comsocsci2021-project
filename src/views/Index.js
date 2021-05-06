@@ -12,6 +12,7 @@ import Footer from "components/Footers/Footer.js";
 export default function Index() {
   return (
     <>
+      <div id="intro"/>
       <IndexNavbar fixed />
       {/*Intro with download button, github and image*/}
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">

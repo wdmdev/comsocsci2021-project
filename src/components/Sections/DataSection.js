@@ -10,13 +10,15 @@ class DataSection extends React.Component {
                   <h3 className="text-3xl mb-2 font-semibold leading-normal">
                       Data
                   </h3>
-                  <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                  <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
+                    style={{textAlign:'justify'}}
+                  >
                     We have worked on Harry Potter text data provided by a repository on Github and user data from 
                     the <a className="text-blueGray-700 hover:text-blueGray-500" href="https://www.reddit.com/r/harrypotter/" target="_blank">r/harrypotter</a> subreddit 
                     uptained using the <a className="text-blueGray-700 hover:text-blueGray-500" href="https://github.com/pushshift/api" target="_blank">PushShift API</a>. <br/>
-                    We also got help from 
+                    We also got "help" from 
                     the <a className="text-blueGray-700 hover:text-blueGray-500" href="https://www.hp-lexicon.org/" target="_blank">Harry Potter Lexicon</a> and <a className="text-blueGray-700 hover:text-blueGray-500" href="https://harrypotter.fandom.com/wiki/List_of_chapters_in_the_Harry_Potter_novels" target="_blank">Harry Potter Wiki</a> by 
-                    scraping data about important characters, their Hogwarts Houses and information about the book chapters.
+                    scraping their sites for information about important characters, their Hogwarts Houses and information about the book chapters.
                   </p>
                   <div className="block pb-6">
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
@@ -36,6 +38,9 @@ class DataSection extends React.Component {
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
                       Nickname Cleaning
+                    </span>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
+                      Character Extraction 
                     </span>
                   </div>
                   <a
