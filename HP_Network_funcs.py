@@ -36,12 +36,13 @@ def clean_book(filename):
     text = text.rstrip()
     return text
 
-def books_in_chapters(chapter_info):
+def books_in_chapters(chapter_info=None):
     fname = "data/books_in_chapters.pkl"
     if os.path.exists(fname):
         with open('data/books_in_chapters.pkl', 'rb') as file:
             books_in_chapters = pkl.load(file)
     else:
+        assert isinstance(chapter_info, pd.DataFrame), "Please specify a dataframe: chapter_info"
         # Get a list of paths to books
         path = "data/books/"
         books = os.listdir(path)
@@ -171,7 +172,7 @@ def create_network(interactions, names, characters_by_communities_reverse):
 
     return G
 
-def network_analysis(G, characters_by_communities_reverse, names, plot_type):
+def network_analysis(G, characters_by_communities_reverse, names, plot_type, save_data = False):
     colors = {'Gryffindor': 'red', 'Slytherin': 'darkgreen', 'Hufflepuff': 'orange', 'Ravenclaw': 'navy'} 
     C = {val:colors[characters_by_communities_reverse[key]] for key, val in names.items() if key in characters_by_communities_reverse.keys()}
     
@@ -219,7 +220,7 @@ def network_analysis(G, characters_by_communities_reverse, names, plot_type):
         ax.set_ylabel('Probability Density')
         ax.set_title('Density Distribution of Modularity for Config. Model vs. True Modularity')
         ax.legend()
-        plt.show()
+        
 
     def louvain_comparison():
         fig, ax = plt.subplots(dpi = 100, figsize = (10,5))
@@ -229,7 +230,6 @@ def network_analysis(G, characters_by_communities_reverse, names, plot_type):
         ax.set_yticks(range(4))
         ax.set_yticklabels(list(colors.keys()))
         ax.set_title("Hogwarts House Split vs. Louvain Community Split")
-        plt.show()
 
         print(f"The modularity of the Louvain Community Split was: {nx.algorithms.community.quality.modularity(g,partition3, weight = 'weight')}")
 
@@ -250,7 +250,7 @@ def network_analysis(G, characters_by_communities_reverse, names, plot_type):
         ax.set_title('Degree distribution of Harry Potter network')
         ax.set_xlabel('Degree')
         ax.set_ylabel('Probability Density')
-        plt.show()
+        
 
     if plot_type == "density":
         plot_density_distribution()
@@ -258,14 +258,29 @@ def network_analysis(G, characters_by_communities_reverse, names, plot_type):
         louvain_comparison()
     elif plot_type == "degree":
         plot_degree_distribution()
+    
+    if save_data:
+        density_data = (modularity, mod1, mod2)
+
+        louvain_data = (M, colors)
+
+        data_types = ["modularity_book", "louvain_book", "graph_book"]
+        for data_type in data_types:
+            data = density_data if data_type == "modularity_book" else louvain_data if data_type == "louvain_book" else G
+            with open("plot_data/"+data_type+"_data.pkl", "wb") as file:
+                pkl.dump(data, file)
 
 
-def interactions_df(interactions_list, characters_by_communities_reverse, names, chapter_info):
+def interactions_df(interactions_list=None, characters_by_communities_reverse=None, names=None, chapter_info=None):
     fname = 'data/interaction_df.csv'
     if os.path.exists(fname):
         with open('data/interaction_df.csv', 'rb') as file:
             df = pkl.load(file)
     else:
+        assert isinstance(interactions_list, list), "Please specify an interactions_list"
+        assert isinstance(characters_by_communities_reverse, dict), "Please specify a dictionary; characters_by_communities_reverse"
+        assert isinstance(names, dict), "Please specify a dictionary; names"
+        assert isinstance(chapter_info, pd.DataFrame), "Please specify a dataframe: chapter_info"
         SW = stopwords.words("english")
         houses = {val:characters_by_communities_reverse[key] for key, val in names.items() if key in characters_by_communities_reverse.keys()}
         
@@ -357,4 +372,30 @@ def TimeSeries(df, sentiment = 'Happiness'):
     ax.set_ylabel(f'sentiment Score')
     ax.set_title(f'A timeline of the {sentiment} in Harry Potter')
     ax.legend()
+    plt.show()
+
+def emotion_bar_houses(df, source, target, tokens, beta = 10):
+    E = df[tokens].apply(lambda x: pd.Series(emotion_score(x)))
+
+    fig, ax = plt.subplots(2,2, dpi = 200, figsize = (20,10))
+    colors = {'Gryffindor': 'C3', 'Hufflepuff': 'C1', 'Ravenclaw': 'C0', 'Slytherin': 'C2'}
+    width = .08
+    N = 4
+    for i in range(N):
+        for j in range(N):
+           
+            softmax = np.exp(beta*E.loc[j + N * i]) / np.sum(np.exp(beta*E.loc[j + N * i]))
+            ax[i // 2, i % 2].bar(np.arange(8) + width *(N // 2 + j), np.exp(beta*E.loc[j + N * i]) / np.sum(np.exp(beta*E.loc[j + N * i])), width = width,
+                                                                                            zorder = 3,
+                                                                                            label = df[target].loc[j + N * i],
+                                                                                            alpha = .8,
+                                                                                            color = colors[df[target].loc[j + N * i]])
+
+        ax[i // 2, i % 2].set_xticks(np.arange(8) + width *N)
+        ax[i // 2, i % 2].set_xticklabels(E.columns)
+        ax[i // 2, i % 2].set_title(f'Softmax Distribution of Emotions for {df[source].loc[j + N *i]}')
+        ax[i // 2, i % 2].set_ylabel('Probability')
+
+        ax[i // 2, i % 2].grid(linestyle = '--')
+        ax[i // 2, i % 2].legend(loc = 'upper left')
     plt.show()

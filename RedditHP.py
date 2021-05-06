@@ -7,6 +7,7 @@ from psaw import PushshiftAPI
 import pandas as pd
 import numpy as np
 import datetime
+import networkx as nx
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import datetime
@@ -484,3 +485,136 @@ def interaction_wordclouds(interactions, freq_type = "TF_IDF", save_as = None):
     if save_as:    
         plt.savefig(save_as)
     plt.show()
+
+
+def UserInteractions():
+    df = pd.read_csv('reddit_data/HP_comments_processed.csv')
+    df = df[df['parent_house'] != 'None']
+    house_dict = {name: house for name, house in df[['author', 'house']].values}
+    house_dict.update({name: house for name, house in df[['parent_author', 'parent_house']].values})
+    H = df.groupby(['author', 'parent_author']).agg({'text':'sum'}).reset_index()
+    H['sentiment'] = H.text.apply(lambda x: vader_sentiment(x))
+
+    return H, house_dict
+
+
+def CreateUserInteractionNetwork(user_interactions, house_dict):
+    G = nx.DiGraph()
+    for (source, target, _, sentiment) in user_interactions.to_records(index=False).tolist():
+        G.add_edge(source, target, weight = (sentiment + 1)/2)
+
+    for node, data in G.nodes(data = True):
+        data['group'] = house_dict[node]
+
+    partition = [set([node for node, data in G.nodes(data = True) if data['group'] == house]) for house in set(house_dict.values())]
+
+    return G, partition
+
+
+def plot_degree_distribution(G, save_data = False):
+    fig, ax = plt.subplots(dpi = 100)
+    names_, degree = zip(*G.degree())
+
+    nbins = 30
+    bins = np.logspace(1, np.log(max(degree)), nbins)
+    hist, edges = np.histogram(degree, bins = bins, density = True )
+    x = (edges[1:] + edges[:-1])/2.
+    # remove 0 entries
+    xx, yy = zip(*[(i,j) for (i,j) in zip(x, hist) if j > 0])
+    ax.plot(xx,yy, marker = '.')
+    ax.grid(linestyle = '--')
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    ax.set_title('Degree distribution of r/harrypotter network')
+    ax.set_xlabel('Degree')
+    ax.set_ylabel('Probability Density')
+   
+    plt.show()
+    
+    if save_data:
+        with open("plot_data/graph_reddit_data.pkl", "wb") as file:
+            pickle.dump(G, file)
+
+
+def emotion_bar_houses(df, source, target, tokens, beta = 10):
+    E = df[tokens].apply(lambda x: pd.Series(emotion_score(x)))
+
+    fig, ax = plt.subplots(2,2, dpi = 200, figsize = (20,10))
+    colors = {'Gryffindor': 'C3', 'Hufflepuff': 'C1', 'Ravenclaw': 'C0', 'Slytherin': 'C2'}
+    width = .08
+    N = 4
+    for i in range(N):
+        for j in range(N):
+           
+            softmax = np.exp(beta*E.loc[j + N * i]) / np.sum(np.exp(beta*E.loc[j + N * i]))
+            ax[i // 2, i % 2].bar(np.arange(8) + width *(N // 2 + j), np.exp(beta*E.loc[j + N * i]) / np.sum(np.exp(beta*E.loc[j + N * i])), width = width,
+                                                                                            zorder = 3,
+                                                                                            label = df[target].loc[j + N * i],
+                                                                                            alpha = .8,
+                                                                                            color = colors[df[target].loc[j + N * i]])
+
+        ax[i // 2, i % 2].set_xticks(np.arange(8) + width *N)
+        ax[i // 2, i % 2].set_xticklabels(E.columns)
+        ax[i // 2, i % 2].set_title(f'Softmax Distribution of Emotions for {df[source].loc[j + N *i]}')
+        ax[i // 2, i % 2].set_ylabel('Probability')
+
+        ax[i // 2, i % 2].grid(linestyle = '--')
+        ax[i // 2, i % 2].legend(loc = 'upper left')
+    plt.show()
+
+
+def configModelModularity(G, partition, houses, K = 100, save_data = False):
+    N = list(dict(G.in_degree()).values())
+    M = list(dict(G.out_degree()).values())
+    cols = [data['group'] for _, data in G.nodes(data = True)]
+    modularity = []
+    for i in tqdm(range(K)):
+        config_model = nx.generators.degree_seq.directed_configuration_model(N,M, create_using=nx.DiGraph(), seed = np.random.randint(0, 10e4))
+        for i, (node, data) in enumerate(config_model.nodes(data = True)):
+            data['group'] = cols[i]
+        partition2 = [set([node for node, data in config_model.nodes(data = True) if data['group'] == house]) for house in set(houses.values())]
+
+        modularity.append(nx.algorithms.community.quality.modularity(config_model,partition2, weight = None))
+    fig, ax = plt.subplots(dpi = 150)
+    ax.hist(modularity, bins = 30, alpha = .7, zorder = 3, density = True)
+    ax.grid(linestyle = '--')
+    ax.axvline(nx.algorithms.community.quality.modularity(G,partition, weight = 'weight'), label = 'True Modularity', color = 'red')
+    ax.set_xlabel('Modularity')
+    ax.set_ylabel('Probability Density')
+    ax.set_title('Modularity Distribution for Config. Model')
+    ax.legend()
+    if save_data:
+        with open("plot_data/modularity_reddit_data.pkl", "wb") as file:
+            pickle.dump((modularity, G, partition), file)
+
+
+
+def Louvain_Stuff(G, partition,houses, t, show = True, save_data = True):
+    import community
+    g = G.to_undirected().copy()
+    for _, _, data in g.edges(data = True):
+        data['weight'] = (data['weight'] +1) /(2)
+    P = community.best_partition(g)
+    partition2 = [set() for i in range(max(P.values())+1)]
+    for c, v in P.items():
+        partition2[v].add(c)
+
+    M = np.zeros((len(partition), len(partition2)))
+    for i in range(len(partition)):
+        for j in range(len(partition2)):
+            M[i,j] = sum([name in partition2[j] for name in partition[i]])/len(partition[i])
+
+    fig, ax = plt.subplots(dpi = 100, figsize = (10,5))
+    plt.imshow(np.delete(M, np.sum(M, axis = 0) < t, 1))
+    cbar = plt.colorbar(extend = 'both')
+    cbar.set_label("Percentage of Hogwwarts House")
+    ax.set_yticks(range(4))
+    ax.set_yticklabels(list(set(houses.values())))
+    ax.set_title("Hogwarts House Split vs. Louvain Community Split")
+    if show:
+        plt.show()
+    print(f"The modularity of the Louvain Community Split was: {nx.algorithms.community.quality.modularity(g,partition2, weight = 'weight')}")
+
+    if save_data:
+        with open("plot_data/louvain_reddit_data.pkl", "wb") as file:
+            pickle.dump((M, houses), file)
