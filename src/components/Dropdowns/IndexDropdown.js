@@ -48,12 +48,12 @@ const IndexDropdown = () => {
           Data
         </HashLink>
         </span>
-        <Link
-          to="/"
+        <HashLink
+          to="/data#datasources"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Data Sources
-        </Link>
+        </HashLink>
         <Link
           to="/"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"

@@ -11,7 +11,7 @@ import Networks from "views/Networks.js";
 import PlotStats from "views/PlotStats.js";
 import Wordclouds from "views/Wordclouds.js";
 
-import Data from "views/Data.js";
+import Data from "views/Data/Data.js";
 import Analysis from "views/Analysis.js";
 
 ReactDOM.render(

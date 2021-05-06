@@ -60,13 +60,14 @@ class DataSection extends React.Component {
                         <img
                           alt="..."
                           src={require("assets/img/redditdata.png").default}
-                          className="w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px"
+                          className="bg-white w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px"
+                          style={{marginTop: '30px'}}
                         />
                         <img
                           alt="..."
                           src={require("assets/img/reddit.svg").default}
                           className="w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px"
-                          style={{marginTop: '-90px'}}
+                          style={{marginTop: '-90px', marginLeft: '20px'}}
                         />
                       </a>
                     </div>
@@ -82,7 +83,7 @@ class DataSection extends React.Component {
                           alt="..."
                           src={require("assets/img/component-btn.png").default}
                           className="w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px"
-                          style={{marginTop: '-65px'}}
+                          style={{marginTop: '-70px'}}
                         />
                       </a>
                     </div>
@@ -94,6 +95,12 @@ class DataSection extends React.Component {
                           className="w-full align-middle rounded absolute shadow-lg top-210-px"
                           style={{marginTop: '-180px', marginLeft:'-50px', maxWidth:"280px"}}
                         />
+                        <img
+                          alt="hplexicon logo"
+                          src={require("assets/img/hplexicon-logo.png").default}
+                          className="w-full align-middle rounded absolute shadow-lg z-3"
+                          style={{marginTop: '90px', marginLeft: '80px', maxWidth: '180px'}}
+                        />
                       </a>
                     </div>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
@@ -103,6 +110,12 @@ class DataSection extends React.Component {
                           src={require("assets/img/harrypotterfandomdata.png").default}
                           className="w-full align-middle rounded absolute shadow-lg top-210-px"
                           style={{marginTop: '-180px', marginLeft:'280px', maxWidth:"280px"}}
+                        />
+                        <img
+                          alt="..."
+                          src={require("assets/img/wiki-fandom-logo.webp").default}
+                          className="w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 right-0"
+                          style={{marginTop: '90px', marginRight: '-75px', maxHeight: '40px'}}
                         />
                       </a>
                     </div>
