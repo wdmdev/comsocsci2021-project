@@ -11,18 +11,28 @@ class DataSection extends React.Component {
                       Data
                   </h3>
                   <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    We have worked on Harry Potter text data from Github (link here) and user data from the r/harrypotter subreddit. <br/>
-                    We also got help from the hp-lexicon.com where we scraped data about important characters, their Hogwarts Houses and information about the book chapters.
+                    We have worked on Harry Potter text data provided by a repository on Github and user data from 
+                    the <a className="text-blueGray-700 hover:text-blueGray-500" href="https://www.reddit.com/r/harrypotter/" target="_blank">r/harrypotter</a> subreddit 
+                    uptained using the <a className="text-blueGray-700 hover:text-blueGray-500" href="https://github.com/pushshift/api" target="_blank">PushShift API</a>. <br/>
+                    We also got help from 
+                    the <a className="text-blueGray-700 hover:text-blueGray-500" href="https://www.hp-lexicon.org/" target="_blank">Harry Potter Lexicon</a> and <a className="text-blueGray-700 hover:text-blueGray-500" href="https://harrypotter.fandom.com/wiki/List_of_chapters_in_the_Harry_Potter_novels" target="_blank">Harry Potter Wiki</a> by 
+                    scraping data about important characters, their Hogwarts Houses and information about the book chapters.
                   </p>
                   <div className="block pb-6">
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Github Text Book Data
+                      Github Text Data
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
                       Reddit User Data
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
                       PushShift API
+                    </span>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
+                     Web Scraping 
+                    </span>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
+                      Stop Word Cleaning
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
                       Nickname Cleaning
@@ -32,43 +42,65 @@ class DataSection extends React.Component {
                     href="/data"
                     className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                   >
-                    View All{" "}
+                    Read More{" "}
                     <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
                   </a>
                 </div>
+
                 {/*Images*/}
-                <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
+                <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-10">
                   <div className="relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0">
-                    <img
-                      alt="..."
-                      src={require("assets/img/component-btn.png").default}
-                      className="w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px"
-                    />
-                    <img
-                      alt="..."
-                      src={require("assets/img/component-profile-card.png").default}
-                      className="w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px"
-                    />
-                    <img
-                      alt="..."
-                      src={require("assets/img/component-info-card.png").default}
-                      className="w-full align-middle rounded-lg absolute shadow-lg max-w-180-px -top-225-px left-40-px z-2"
-                    />
-                    <img
-                      alt="..."
-                      src={require("assets/img/component-info-2.png").default}
-                      className="w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px -left-50-px top-25-px"
-                    />
-                    <img
-                      alt="..."
-                      src={require("assets/img/component-menu.png").default}
-                      className="w-full align-middle rounded absolute shadow-lg max-w-580-px -left-20-px top-210-px"
-                    />
-                    <img
-                      alt="..."
-                      src={require("assets/img/component-btn-pink.png").default}
-                      className="w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px"
-                    />
+                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                      <a href="https://www.reddit.com/r/harrypotter/" target="_blank">
+                        <img
+                          alt="..."
+                          src={require("assets/img/redditdata.png").default}
+                          className="w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px"
+                        />
+                        <img
+                          alt="..."
+                          src={require("assets/img/reddit.svg").default}
+                          className="w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px"
+                          style={{marginTop: '-90px'}}
+                        />
+                      </a>
+                    </div>
+                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                      <a href="https://github.com/khushmeeet/potter-nlp/tree/master/data" target="_blank">
+                        <img
+                          alt="..."
+                          src={require("assets/img/githubdata.png").default}
+                          className="w-full align-middle rounded-lg absolute shadow-lg max-w-180-px left-40-px z-2"
+                          style={{marginTop: '-140px'}}
+                        />
+                        <img
+                          alt="..."
+                          src={require("assets/img/component-btn.png").default}
+                          className="w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px"
+                          style={{marginTop: '-65px'}}
+                        />
+                      </a>
+                    </div>
+                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                      <a href="https://www.hp-lexicon.org/" target="_blank">
+                        <img
+                          alt="Harry Potter Lexicon Website Link"
+                          src={require("assets/img/hplexicon.png").default}
+                          className="w-full align-middle rounded absolute shadow-lg top-210-px"
+                          style={{marginTop: '-180px', marginLeft:'-50px', maxWidth:"280px"}}
+                        />
+                      </a>
+                    </div>
+                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                      <a href="https://harrypotter.fandom.com/wiki/List_of_chapters_in_the_Harry_Potter_novels" target="_blank">
+                        <img
+                          alt="Harry Potter Fandom Wiki Website Link"
+                          src={require("assets/img/harrypotterfandomdata.png").default}
+                          className="w-full align-middle rounded absolute shadow-lg top-210-px"
+                          style={{marginTop: '-180px', marginLeft:'280px', maxWidth:"280px"}}
+                        />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
