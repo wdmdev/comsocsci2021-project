@@ -29,7 +29,8 @@ class InteractiveSection extends React.Component {
                           <img
                             alt="..."
                             className="align-middle border-none max-w-full h-auto rounded-lg"
-                            src={require("assets/img/login.jpg").default}
+                            src={require("assets/img/plotstatspage.png").default}
+                            style={{height: '200px'}}
                           />
                         </div>
                       </Link>
@@ -39,12 +40,13 @@ class InteractiveSection extends React.Component {
                       <h5 className="text-xl font-semibold pb-4 text-center">
                         Wordclouds
                       </h5>
-                      <Link to="/networks">
+                      <Link to="/wordclouds">
                         <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                           <img
                             alt="..."
                             className="align-middle border-none max-w-full h-auto rounded-lg"
-                            src={require("assets/img/profile.jpg").default}
+                            src={require("assets/img/wordcloudpage.png").default}
+                            style={{height: '200px'}}
                           />
                         </div>
                       </Link>
@@ -54,12 +56,13 @@ class InteractiveSection extends React.Component {
                       <h5 className="text-xl font-semibold pb-4 text-center">
                         Networks
                       </h5>
-                      <Link to="/wordclouds">
+                      <Link to="/networks">
                         <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                           <img
                             alt="..."
                             className="align-middle border-none max-w-full h-auto rounded-lg"
-                            src={require("assets/img/landing.jpg").default}
+                            src={require("assets/img/networkpage.png").default}
+                            style={{height: '200px'}}
                           />
                         </div>
                       </Link>
