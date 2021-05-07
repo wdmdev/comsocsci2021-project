@@ -23,8 +23,8 @@ class IntroSection extends React.Component {
                     </p>
                     <div className="mt-12">
                         <a
-                        href={require("assets/files/notebook.zip").default}
-                        download = "HP_network_notebook.zip"
+                        href={require("assets/files/notebooks.zip").default}
+                        download = "HP_network_notebooks.zip"
                         className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                         >
                         Download Notebooks
