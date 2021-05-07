@@ -50,7 +50,7 @@ class RedditNetwork extends React.Component {
                     This time the difference in communication is not that clear. This could be due to many things from the 
                     word selection to the extraction of user interactions and to not understanding the internal
                     language of the r/harrypotter community well enough. Or it could simply be, that the reddit users actually
-                    speaks with another sentiment to each other that the characters in the books.
+                    speaks with another sentiment to each other that the characters in the books. 
                  </p>
                 </div>
             </section>

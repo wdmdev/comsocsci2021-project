@@ -75,7 +75,7 @@ class HPNetwork extends React.Component {
                       select the words which, according to the TF-IDF, provides the most information.
                       From these selected words we created word clouds of how the characters from different houses speak to each other.
                       A selected couple of clouds can be seen below, and the rest are available in the page's <HashLink 
-                      to="/#interactive" className="text-blueGray-700 hover:text-blueGray-500">Demo Section</HashLink>.
+                      to="/#interactive" className="text-blueGray-700 hover:text-blueGray-500">Demo and Insights Section</HashLink>.
                   </p>
 
                   <img

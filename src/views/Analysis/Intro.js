@@ -6,7 +6,7 @@ class Intro extends React.Component {
         return (
             <section className="header relative items-center flex h-screen max-h-860-px">
                 <div className="ml-auto mr-auto"
-                     style={{width:'70%', marginTop: '200px', marginBottom: '500px'}}
+                     style={{width:'70%', marginTop: '200px', marginBottom: '550px'}}
                 >
                   <h1 className="text-5xl mb-2 font-semibold leading-normal" style={{textAlign:'center'}} >
                      Data Analysis 

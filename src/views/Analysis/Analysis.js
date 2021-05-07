@@ -7,6 +7,7 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Intro from "views/Analysis/Intro.js";
 import HPNetwork from "views/Analysis/HPNetwork.js";
 import RedditNetwork from "views/Analysis/RedditNetwork.js";
+import Comparison from "views/Analysis/Comparison.js";
 
 class Analysis extends React.Component {
 
@@ -17,6 +18,7 @@ class Analysis extends React.Component {
                 <Intro/>
                 <HPNetwork />
                 <RedditNetwork />
+                <Comparison />
             </>
         )
     }
