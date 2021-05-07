@@ -13,8 +13,10 @@ class Data extends React.Component {
             <>
                 <IndexNavbar/>
                 <DataSources/>
-                <Features/>
-                <Preprocessing/>
+                <section id="features" className="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
+                    <Features/>
+                    <Preprocessing/>
+                </section>
             </>
         )
     }
