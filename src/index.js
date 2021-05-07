@@ -15,7 +15,7 @@ import Data from "views/Data/Data.js";
 import Analysis from "views/Analysis.js";
 
 ReactDOM.render(
-  <BrowserRouter basename={"/comsocsci2021-project"}>
+  <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Index} />
       <Route exact path="/plotstats" component={PlotStats} />
@@ -23,8 +23,8 @@ ReactDOM.render(
       <Route exact path="/wordclouds" component={Wordclouds} />
       <Route exact path="/data" component={Data} />
       <Route exact path="/analysis" component={Analysis} />
-      {/* add redirect for first page */}
-      <Redirect from="*" to="index.html" />
+      <Route component={Index} />
+      <Redirect from="*" to="/comsocsci2021-project"/>
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
