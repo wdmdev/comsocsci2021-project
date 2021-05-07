@@ -3,15 +3,18 @@ import React from "react";
 //Components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 
+//Views
+import HPNetwork from "views/Analysis/HPNetwork.js";
+import RedditNetwork from "views/Analysis/RedditNetwork.js";
+
 class Analysis extends React.Component {
 
     render () {
         return (
             <>
                 <IndexNavbar/>
-                <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
-                    <div>Analysis page under construction...</div>
-                </section>
+                <HPNetwork />
+                <RedditNetwork />
             </>
         )
     }

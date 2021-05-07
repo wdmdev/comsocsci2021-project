@@ -7,12 +7,12 @@ import "assets/styles/tailwind.css";
 
 // views without layouts
 import Index from "views/Index.js";
-import Networks from "views/Networks.js";
-import PlotStats from "views/PlotStats.js";
-import Wordclouds from "views/Wordclouds.js";
+import Networks from "views/Interactive/Networks.js";
+import PlotStats from "views/Interactive/PlotStats.js";
+import Wordclouds from "views/Interactive/Wordclouds.js";
 
 import Data from "views/Data/Data.js";
-import Analysis from "views/Analysis.js";
+import Analysis from "views/Analysis/Analysis.js";
 
 ReactDOM.render(
   <BrowserRouter basename="comsocsci2021-project">

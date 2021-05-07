@@ -97,13 +97,15 @@ class AnalysisSection extends React.Component {
                     The character network was based on interactions between Harry Potter characters and the reddit network was based on posts/comments 
                     between reddit users in the r/harrypotter subreddit forum.
                   </p>
-                  <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    We then splitted the networks using modularity, which the interested reader can find more about in the notebooks. 
-                    From this we looked at how our splits matched against the actual Hogwarts Houses of the characters and redditers.
+                  <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
+                    style={{textAlign:'justify'}}
+                  >
+                    We splitted the networks into communities using modularity, which the interested reader can find more about in the notebooks. 
+                    The splits were evaluated to see if the communities we found could be defined as actual communities 
+                    or if the they could simply be explained by randomness in the interactions. 
                     Finally we looked at the words used by characters and reddit users from the different Hogwarts Houses 
-                    and what feelings the words described. From this we were able to make a comparison of how the  
-                    Hogwarts Houses in Harry Potter talk about each other and how the reddit Hogwarts Houses talk about each other.
-
+                    and the happiness and feelings these words described. To see if the reddit users' communication 
+                    might be similar to the actual Hogwarts Houses they associate themselves with.
                   </p>
                   <div className="block pb-6">
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
@@ -120,6 +122,12 @@ class AnalysisSection extends React.Component {
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
                       Sentiment Analysis
+                    </span>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
+                      Community Splitting
+                    </span>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
+                      Word Clouds
                     </span>
                   </div>
                   <a
