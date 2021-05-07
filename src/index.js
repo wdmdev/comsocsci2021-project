@@ -15,7 +15,7 @@ import Data from "views/Data/Data.js";
 import Analysis from "views/Analysis.js";
 
 ReactDOM.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter basename={"/comsocsci2021-project"}>
     <Switch>
       <Route exact path="/" component={Index} />
       <Route exact path="/plotstats" component={PlotStats} />
