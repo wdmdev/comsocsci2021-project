@@ -27,7 +27,7 @@ class InteractiveSection extends React.Component {
                       <Link to="/plotstats">
                         <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                           <img
-                            alt="..."
+                            alt="Plots and stats"
                             className="align-middle border-none max-w-full h-auto rounded-lg"
                             src={require("assets/img/plotstatspage.png").default}
                             style={{height: '200px'}}
@@ -54,7 +54,7 @@ class InteractiveSection extends React.Component {
 
                     <div className="w-full lg:w-4/12 px-4">
                       <h5 className="text-xl font-semibold pb-4 text-center">
-                        Networks
+                        Interactive Harry Potter Network
                       </h5>
                       <Link to="/networks">
                         <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
