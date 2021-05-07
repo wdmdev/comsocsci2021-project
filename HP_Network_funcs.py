@@ -321,7 +321,6 @@ def WordCloudsCharacters(df, Selected_characters):
 def emotion_bars(df, source, targets):
     H = df[df['Source'] == source].groupby(['Chapter', 'Target']).agg({'Tokens':'sum', 'Sentiment':'mean'}).unstack()
     fig, ax = plt.subplots(dpi = 150, figsize = (20,5))
-
     beta = 15
     width = .08
     N = len(targets)
@@ -374,10 +373,11 @@ def TimeSeries(df, sentiment = 'Happiness'):
     ax.legend()
     plt.show()
 
-def emotion_bar_houses(df, source, target, tokens, beta = 10):
+def emotion_bar_houses_books(df, source, target, tokens, beta = 10):
     E = df[tokens].apply(lambda x: pd.Series(emotion_score(x)))
 
     fig, ax = plt.subplots(2,2, dpi = 200, figsize = (20,10))
+    fig.suptitle('Emotion distributions in the books', fontsize = 28)
     colors = {'Gryffindor': 'C3', 'Hufflepuff': 'C1', 'Ravenclaw': 'C0', 'Slytherin': 'C2'}
     width = .08
     N = 4
