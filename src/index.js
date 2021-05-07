@@ -24,7 +24,7 @@ ReactDOM.render(
       <Route exact path="/data" component={Data} />
       <Route exact path="/analysis" component={Analysis} />
       {/* add redirect for first page */}
-      <Redirect from="*" to="/" />
+      <Redirect from="*" to="index.html" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
