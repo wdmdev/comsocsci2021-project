@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/comsocsci2021-project/static/css/main.c0af0ab4.chunk.css",
-    "main.js": "/comsocsci2021-project/static/js/main.2de5fa35.chunk.js",
-    "main.js.map": "/comsocsci2021-project/static/js/main.2de5fa35.chunk.js.map",
+    "main.js": "/comsocsci2021-project/static/js/main.f3cbad3e.chunk.js",
+    "main.js.map": "/comsocsci2021-project/static/js/main.f3cbad3e.chunk.js.map",
     "runtime-main.js": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js",
     "runtime-main.js.map": "/comsocsci2021-project/static/js/runtime-main.7b44c633.js.map",
     "static/css/2.29613607.chunk.css": "/comsocsci2021-project/static/css/2.29613607.chunk.css",
@@ -36,6 +36,6 @@
     "static/css/2.29613607.chunk.css",
     "static/js/2.145c3b72.chunk.js",
     "static/css/main.c0af0ab4.chunk.css",
-    "static/js/main.2de5fa35.chunk.js"
+    "static/js/main.f3cbad3e.chunk.js"
   ]
 }
