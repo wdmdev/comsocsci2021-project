@@ -76,24 +76,24 @@ const IndexDropdown = () => {
           Data Analysis
         </HashLink>
         </span>
-        <Link
-          to="/"
+        <HashLink
+          to="/analysis"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Harry Potter
-        </Link>
-        <Link
-          to="/"
+        </HashLink>
+        <HashLink
+          to="/analysis#reddit"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Reddit Forum
-        </Link>
-        <Link
-          to="/"
+        </HashLink>
+        <HashLink
+          to="/analysis#comparison"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Comparison
-        </Link>
+        </HashLink>
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={

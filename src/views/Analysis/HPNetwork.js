@@ -1,4 +1,5 @@
 import React from "react";
+import {HashLink} from "react-router-hash-link";
 
 class HPNetwork extends React.Component {
 
@@ -68,14 +69,21 @@ class HPNetwork extends React.Component {
                     style={{textAlign:'justify', marginBottom: '50px'}}
                   >
                       Now we want to look a little closer at the Hogwarts Houses and the words each house uses.
-                      For this we did a <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" target="_blank"
+                      For this we did a <a className="text-blueGray-700 hover:text-blueGray-500" href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" target="_blank"
                       >Term Frequency Inverse Document Frequency(TF-IDF)</a> analysis. Which is a fancy way of saying
                       that we found out how important/special the words used by each Hogwarts House were and used that to
-                      select the words which, according to the TF-IDF, provides the most information about each Hogwarts House.
-                      From these selected words we created the word clouds below.
+                      select the words which, according to the TF-IDF, provides the most information.
+                      From these selected words we created word clouds of how the characters from different houses speak to each other.
+                      A selected couple of clouds can be seen below, and the rest are available in the page's <HashLink 
+                      to="/#interactive" className="text-blueGray-700 hover:text-blueGray-500">Demo Section</HashLink>.
                   </p>
 
-                  
+                  <img
+                  className="rounded-lg block ml-auto mr-auto"
+                  alt="Word clouds houses"
+                  src={require("assets/img/two-wordclouds.png").default} 
+                  />
+
 
                 </div>
             </section>
