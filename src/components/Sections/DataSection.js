@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 class DataSection extends React.Component {
 
@@ -43,13 +44,13 @@ class DataSection extends React.Component {
                       Character Extraction 
                     </span>
                   </div>
-                  <a
-                    href="/data"
+                  <Link
+                    to="/data"
                     className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                   >
                     Read More{" "}
                     <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-                  </a>
+                  </Link>
                 </div>
 
                 {/*Images*/}
