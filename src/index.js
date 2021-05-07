@@ -17,12 +17,12 @@ import Analysis from "views/Analysis.js";
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Switch>
-      <Route path="/comsocsci2021-project" exact component={Index} />
-      <Route path="/plotstats" exact component={PlotStats} />
-      <Route path="/networks" exact component={Networks} />
-      <Route path="/wordclouds" exact component={Wordclouds} />
-      <Route path="/data" exact component={Data} />
-      <Route path="/analysis" exact component={Analysis} />
+      <Route exact path="/" component={Index} />
+      <Route exact path="/plotstats" component={PlotStats} />
+      <Route exact path="/networks" component={Networks} />
+      <Route exact path="/wordclouds" component={Wordclouds} />
+      <Route exact path="/data" component={Data} />
+      <Route exact path="/analysis" component={Analysis} />
       {/* add redirect for first page */}
       <Redirect from="*" to="/comsocsci2021-project" />
     </Switch>
