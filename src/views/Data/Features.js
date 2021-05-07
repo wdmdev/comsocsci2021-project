@@ -20,13 +20,15 @@ class Features extends React.Component {
                   <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
                     style={{textAlign:'justify'}}
                   >
-                    We have gathered an overview of the properties and features of each data set after preprocessing.
+                    We have gathered an overview of the properties and features of each data set after preprocessing. 
+                    The graphs show some overall information about the Harry Potter text data, the Reddit text data and 
+                    the networks created from them. 
                   </p>
 
                   <h3 className="text-2xl mb-2 font-semibold leading-normal" style={{textAlign:'center'}} >
                       Harry Potter Books
                   </h3>
-                  <Plotly json={require("assets/plots/characters-by-house.json")}/>
+                  <Plotly json={require("assets/plots/characters-by-house.json")} />
 
                 </div>
             </section>
