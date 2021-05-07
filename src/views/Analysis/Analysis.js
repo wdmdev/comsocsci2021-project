@@ -4,6 +4,7 @@ import React from "react";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 
 //Views
+import Intro from "views/Analysis/Intro.js";
 import HPNetwork from "views/Analysis/HPNetwork.js";
 import RedditNetwork from "views/Analysis/RedditNetwork.js";
 
@@ -13,6 +14,7 @@ class Analysis extends React.Component {
         return (
             <>
                 <IndexNavbar/>
+                <Intro/>
                 <HPNetwork />
                 <RedditNetwork />
             </>
