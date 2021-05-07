@@ -272,9 +272,9 @@ def network_analysis(G, characters_by_communities_reverse, names, plot_type, sav
 
 
 def interactions_df(interactions_list=None, characters_by_communities_reverse=None, names=None, chapter_info=None):
-    fname = 'data/interaction_df.csv'
+    fname = 'data/interaction_df.pkl'
     if os.path.exists(fname):
-        with open('data/interaction_df.csv', 'rb') as file:
+        with open('data/interaction_df.pkl', 'rb') as file:
             df = pkl.load(file)
     else:
         assert isinstance(interactions_list, list), "Please specify an interactions_list"
