@@ -24,7 +24,7 @@ ReactDOM.render(
       <Route exact path="/data" component={Data} />
       <Route exact path="/analysis" component={Analysis} />
       {/* add redirect for first page */}
-      <Redirect from="*" to="/comsocsci2021-project" />
+      <Redirect from="*" to="/" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

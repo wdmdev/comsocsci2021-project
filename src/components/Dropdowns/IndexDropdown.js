@@ -105,19 +105,19 @@ const IndexDropdown = () => {
         </HashLink>
         </span>
         <Link
-          to="/"
+          to="/plotstats"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Plots and Stats
         </Link>
         <Link
-          to="/"
+          to="/networks"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Networks
         </Link>
         <Link
-          to="/"
+          to="/wordclouds"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Wordclouds
