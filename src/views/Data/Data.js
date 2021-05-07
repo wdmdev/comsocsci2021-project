@@ -3,8 +3,8 @@ import React from "react";
 //Components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DataSources from "views/Data/DataSources.js";
-import Features from "views/Data/Features.js";
-import Preprocessing from "views/Data/Preprocessing.js";
+import HarryPotterData from "views/Data/HarryPotterData";
+import RedditData from "views/Data/RedditData.js";
 
 class Data extends React.Component {
 
@@ -14,8 +14,8 @@ class Data extends React.Component {
                 <IndexNavbar/>
                 <DataSources/>
                 <section id="features" className="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
-                    <Features/>
-                    <Preprocessing/>
+                    <HarryPotterData/>
+                    <RedditData/>
                 </section>
             </>
         )
