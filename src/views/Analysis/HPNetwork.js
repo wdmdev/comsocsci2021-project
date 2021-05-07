@@ -83,7 +83,12 @@ class HPNetwork extends React.Component {
                   alt="Word clouds houses"
                   src={require("assets/img/two-wordclouds.png").default} 
                   />
-
+                  <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600"
+                    style={{textAlign:'justify', marginBottom: '50px'}}
+                  >
+                      In this particular case we see some words that could indicate, 'most suprisingly', that
+                      Hufflepuff has a better or more neutral relation to Ravenclaw than with Slytherin.
+                  </p>
 
                 </div>
             </section>
