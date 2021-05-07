@@ -4,7 +4,7 @@ class DataSection extends React.Component {
 
     render () {
         return (
-            <div id="data" className="container mx-auto overflow-hidden pb-20">
+            <div id="datasection" className="container mx-auto overflow-hidden pb-20">
               <div className="flex flex-wrap items-center">
                 <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
                   <h3 className="text-3xl mb-2 font-semibold leading-normal">
@@ -22,7 +22,7 @@ class DataSection extends React.Component {
                   </p>
                   <div className="block pb-6">
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
-                      Github Text Data
+                      Raw Text Data
                     </span>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2">
                       Reddit User Data
@@ -44,7 +44,7 @@ class DataSection extends React.Component {
                     </span>
                   </div>
                   <a
-                    href="/data"
+                    href="#data"
                     className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                   >
                     Read More{" "}

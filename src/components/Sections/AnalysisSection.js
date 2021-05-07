@@ -4,7 +4,9 @@ class AnalysisSection extends React.Component {
 
     render () {
         return (
-            <div id="analysis" className="container mx-auto overflow-hidden pb-40">
+            <div id="analysis" className="container mx-auto overflow-hidden pb-40"
+                style={{marginTop: '-100px'}}
+            >
               <div className="flex flex-wrap items-center pt-20">
                 <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
                   <div className="justify-center flex flex-wrap relative">

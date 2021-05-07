@@ -43,7 +43,7 @@ const IndexDropdown = () => {
           }
         >
         <HashLink
-          to="/#data"
+          to="#datasection"
         >
           Data
         </HashLink>
