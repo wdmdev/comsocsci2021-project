@@ -49,7 +49,7 @@ const IndexDropdown = () => {
         </HashLink>
         </span>
         <Link
-          to="/data"
+          to="/data#datasources"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Data Sources
@@ -77,7 +77,7 @@ const IndexDropdown = () => {
         </HashLink>
         </span>
         <HashLink
-          to="/analysis"
+          to="/analysis#hp"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Harry Potter
